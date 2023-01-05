@@ -36,14 +36,14 @@ describe('test core', () => {
   })
 
   it('compressImgBundle', async() => {
-    const bufferRes = await fs.readFile(`${cwd()}/__test__/test.png`)
+    const bufferRes = await fs.readFile(`${cwd()}/packages/core/__test__/test.png`)
     const callFn = vi.fn()
     const tinifyFn = async(data: Uint8Array) => {
       callFn()
       return Promise.resolve(data)
     }
     await compressImgBundle(
-      `${cwd()}/__test__/`,
+      `${cwd()}/packages/core/__test__/`,
       option.APIKey,
       {
         'test.png': {
@@ -54,7 +54,7 @@ describe('test core', () => {
       tinifyFn,
     )
     expect(callFn).toBeCalled()
-    const exists = await fs.pathExists(`${cwd()}/__test__/test-res.png`)
+    const exists = await fs.pathExists(`${cwd()}/packages/core/__test__/test-res.png`)
     expect(exists).toBeTruthy()
   })
 })
