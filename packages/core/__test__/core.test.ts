@@ -37,10 +37,10 @@ describe('test core', () => {
 
   it('compressImgBundle', async() => {
     const testResImgDir = `${cwd()}/packages/core/__test__/test-res.png`
-    const testResImgOutPutDir = `${cwd()}/packages/core/__test__/test-res.png`
+    const testResImgOutPutDir = `${cwd()}/packages/core/__test__/`
     const testImgDir = `${cwd()}/packages/core/__test__/test.png`
-    const isClear = await fs.pathExists(testResImgDir)
-    if (!isClear)
+    const isShouldClear = await fs.pathExists(testResImgDir)
+    if (isShouldClear)
       await fs.remove(testResImgDir)
 
     const bufferRes = await fs.readFile(testImgDir)
