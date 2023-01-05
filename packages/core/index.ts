@@ -7,7 +7,8 @@ import type { PluginOption } from 'vite'
 import type { CompressOption, IBundle } from './types'
 import type { OutputOptions } from 'rollup'
 
-const tinifyBuffer = (data: Uint8Array) => {
+export const tinifyBuffer = (data: Uint8Array, APIKey: string) => {
+  tinify.key = APIKey
   return new Promise((resolve) => {
     tinify.fromBuffer(data)
       .toBuffer((err, resultData) => {
@@ -18,9 +19,11 @@ const tinifyBuffer = (data: Uint8Array) => {
       })
   })
 }
-const compressImgBundle = async(
+export const compressImgBundle = async(
   outputDir: string,
+  APIKey: string,
   bundle: IBundle,
+  tinify = tinifyBuffer,
 ) => {
   for (const key in bundle) {
     // 匹配是否为图片
@@ -29,18 +32,16 @@ const compressImgBundle = async(
       const bufferSource = bundle[key].source as Uint8Array
       // 压缩
       log('info',
-        `compression start:[${fileName}][${formatSizeUnits(bufferSource.byteLength)}]`,
+            `compression start:[${fileName}][${formatSizeUnits(bufferSource.byteLength)}]`,
       )
-      const tinifyBufferRes = (await tinifyBuffer(bufferSource)) as Uint8Array
+      const tinifyBufferRes = (await tinify(bufferSource, APIKey)) as Uint8Array
       log('success',
-        `compression complete:[${fileName}][${formatSizeUnits(tinifyBufferRes.byteLength)}]`,
+            `compression complete:[${fileName}][${formatSizeUnits(tinifyBufferRes.byteLength)}]`,
       )
       // 写入
-      await outputFile(`${outputDir}/${fileName}`, tinifyBufferRes, {}, (err: Error) => {
-        if (err) throw err
-      })
+      await outputFile(`${outputDir}/${fileName}`, tinifyBufferRes)
       log('success',
-        `write complete:[${fileName}][${formatSizeUnits(tinifyBufferRes.byteLength)}]`,
+            `write complete:[${fileName}][${formatSizeUnits(tinifyBufferRes.byteLength)}]`,
       )
     }
   }
@@ -53,18 +54,19 @@ const unplugin = createUnplugin((option: CompressOption) => {
       name: 'unplugin-img-compress',
     }
   }
-  tinify.key = option.APIKey
+  if (!option.compressImgBundle)
+    option.compressImgBundle = compressImgBundle
+
   return {
     name: 'unplugin-img-compress',
     async writeBundle(
-      options: OutputOptions,
+      outputOptions: OutputOptions,
       bundle: IBundle) {
-      log('info',
-        'unplugin-img-compress running...',
-      )
-      const outputDir = options.dir!.replaceAll('\\', '/')
-      if (option.runtime === 'build')
-        await compressImgBundle(outputDir, bundle)
+      log('info', 'unplugin-img-compress running...')
+      if (option.runtime === 'build' && option.compressImgBundle) {
+        const outputDir = outputOptions.dir!.replaceAll('\\', '/')
+        await option.compressImgBundle(outputDir, option.APIKey, bundle)
+      }
     },
   }
 })

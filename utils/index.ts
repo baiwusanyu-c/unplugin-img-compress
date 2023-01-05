@@ -15,11 +15,21 @@ export const log = (type: TLog, msg: string) => {
     console.log(chalk.greenBright.bold(`${msg}`))
 }
 
-export const extend = Object.assign
+export const extend = <
+    T extends Record<string, any>,
+    U extends Record<string, any>>(
+    objFir: T,
+    objSec: U): T & U => {
+  return Object.assign({}, objFir, objSec)
+}
 
 export function formatSizeUnits(bytes: number): string {
   let res = ''
   if (bytes >= 1073741824) res = `${(bytes / 1073741824).toFixed(2)} GB`
   else if (bytes >= 1048576) res = `${(bytes / 1048576).toFixed(2)} MB`; else if (bytes >= 1024) res = `${(bytes / 1024).toFixed(2)} KB`; else if (bytes > 1) res = `${bytes} bytes`; else if (bytes === 1) res = `${bytes} byte`; else res = '0 bytes'
   return res
+}
+
+export function jsonClone<T>(val: T): T {
+  return JSON.parse(JSON.stringify(val))
 }

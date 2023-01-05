@@ -1,3 +1,4 @@
+
 export interface CompressOption{
   //  tinypng 的 APIkey
   APIKey: string
@@ -7,6 +8,11 @@ export interface CompressOption{
   runtime: 'build' | 'dev'
   // 文件监听模式，watch 仅在 runtime 为 dev 时有效
   mode: 'watch' | 'once'
+  // 压缩方法
+  compressImgBundle?: (
+    outputOptions: string,
+    APIKey: string,
+    bundle: IBundle) => Promise<void>
 }
 export interface AssetInfo {
   name: string | undefined
