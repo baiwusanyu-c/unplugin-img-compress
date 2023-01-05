@@ -1,9 +1,8 @@
+import { resolve } from 'path'
 import type { CompressOption } from './types'
-
 export const defaultOption: CompressOption = {
-  type: 'vite',
   APIKey: '',
-  dir: '',
+  dir: `${resolve()}asset`,
   runtime: 'build',
   mode: 'once',
 }

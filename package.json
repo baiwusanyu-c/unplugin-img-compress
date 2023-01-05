@@ -2,7 +2,6 @@
   "name": "unplugin-img-compress",
   "description": "",
   "private": false,
-  "type": "module",
   "version": "1.0.0",
   "packageManager": "^pnpm@7.0.0",
   "keywords": [],
@@ -32,15 +31,15 @@
   "scripts": {
     "init": "pnpm i",
     "lint:fix": "eslint . --fix",
-    "dev": "pnpm run --filter @unplugin-img-compress/play dev",
-    "build:split": "pnpm run clean && cross-env RUNTIME_ENV=production pnpm run --filter @unplugin-img-compress/build build:split",
-    "build:all": "pnpm run clean && cross-env RUNTIME_ENV=production pnpm run --filter @unplugin-img-compress/build build:all",
+    "dev:play:dev": "pnpm run --filter @unplugin-img-compress/play dev",
+    "dev:play:build": "pnpm run --filter @unplugin-img-compress/play build",
+    "build": "pnpm run clean && cross-env RUNTIME_ENV=production pnpm run --filter @unplugin-img-compress/build build",
     "prepublishOnly": "pnpm run build:all",
     "release": "bumpp package.json --commit --push --tag && pnpm -r publish --access public",
     "publish": "pnpm publish --no-git-checks --access public",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "clean": "rimraf dist",
-    "prepare": "husky install && pnpm run husky:step1 && pnpm run husky:step2",
+    "prepare": "husky install",
     "husky:step1": "npx husky add .husky/pre-commit \"npm exec lint-staged --allow-empty\"",
     "husky:step2": "git add .husky/pre-commit && npx husky add .husky/commit-msg \"npx --no -- commitlint --edit $1\" && git add .husky/commit-msg",
     "test": "vitest",
@@ -50,12 +49,14 @@
   "peerDependencies": {
     "chalk": "4.1.2",
     "fs-extra": "^10.0.1",
-    "ora": "^6.1.2"
+    "ora": "^6.1.2",
+    "tinify": "^1.7.1"
   },
   "dependencies": {
     "chalk": "4.1.2",
     "fs-extra": "^10.0.1",
     "ora": "^6.1.2",
+    "tinify": "^1.7.1",
     "unplugin": "^0.9.6"
   },
   "devDependencies": {
@@ -64,8 +65,7 @@
     "@commitlint/cli": "^16.2.1",
     "@commitlint/config-conventional": "^16.2.1",
     "@rollup/plugin-node-resolve": "^14.1.0",
-    "@types/fs-extra": "^9.0.13",
-    "@types/node": "^18.0.0",
+    "@types/gulp": "^4.0.10",
     "@unplugin-img-compress/build": "workspace:*",
     "@unplugin-img-compress/core": "workspace:*",
     "@unplugin-img-compress/entry": "workspace:*",
@@ -87,8 +87,8 @@
     "rollup-plugin-typescript2": "^0.34.0",
     "tsup": "^6.2.3",
     "typescript": "^4.9.3",
-    "vitest": "0.22.1",
-    "vite": "^3.2.5"
+    "vite": "^4.0.4",
+    "vitest": "0.22.1"
   },
   "lint-staged": {
     "*.{vue,js,ts,jsx,tsx,md,json}": [

@@ -1,15 +1,15 @@
+import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
-import { imgCompress } from '@unplugin-img-compress/core'
+import { viteImgCompress } from '../dist/index'
 import type { PluginOption } from 'vite'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
-    imgCompress({
-      type: 'vite',
-      APIKey: '',
-      dir: '',
+    viteImgCompress({
+      APIKey: 'kZgn8pxfdjQjKFmf2StLq7CY4TqMgs0T',
+      dir: `${resolve()}asset`,
       runtime: 'build',
       mode: 'once',
     }) as PluginOption,
