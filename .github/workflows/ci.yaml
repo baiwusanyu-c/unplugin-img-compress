@@ -1,35 +1,37 @@
-name: 🌈 CI
+
+name: 🪸 CI
 
 on:
   push:
-    branches:
-      - master
-
+    branches: [ "master" ]
   pull_request:
-    branches:
-      - master
-
-  workflow_dispatch:
+    branches: [ "master" ]
 
 jobs:
-  CI:
+  build:
+
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+
     steps:
-      - uses: actions/checkout@v3
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'pnpm'
+        
+    - name: Setup
+      run: npm i -g @antfu/ni
+      
+    - name: Install
+      run: nci
 
-      - uses: pnpm/action-setup@v2
+    - name: lint fix
+      run: nr lint:fix
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: pnpm
-
-      - name: Install
-        run: pnpm install --no-frozen-lockfile
-
-      - name: lint fix
-        run: npm run lint:fix
-
-      - name: unit test
-        run: npm run test
+    - name: unit test
+      run: nr test
