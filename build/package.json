@@ -1,0 +1,21 @@
+{
+  "name": "@unplugin-img-compress/build",
+  "description": "",
+  "type": "module",
+  "version": "1.0.0",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "scripts": {
+    "build:split": "cross-env BUILD_MODE=split tsup-node --config index.ts && pnpm run rewrite",
+    "build:all": "cross-env BUILD_MODE=all tsup --config index.ts",
+    "rewrite": "gulp -require sucrase/register/ts -f gulp-file.ts",
+    "clean": "rimraf dist"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "rimraf": "^3.0.2",
+    "sucrase": "^3.21.0",
+    "tsup": "^6.2.3"
+  }
+}

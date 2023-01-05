@@ -1,0 +1,104 @@
+{
+  "name": "unplugin-img-compress",
+  "description": "",
+  "private": false,
+  "type": "module",
+  "version": "1.0.0",
+  "packageManager": "^pnpm@7.0.0",
+  "keywords": [],
+  "license": "MIT",
+  "author": "",
+  "homepage": "",
+  "repository": "",
+  "bugs": "",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts"
+      ]
+    }
+  },
+  "scripts": {
+    "init": "pnpm i",
+    "lint:fix": "eslint . --fix",
+    "dev": "pnpm run --filter @unplugin-img-compress/play dev",
+    "build:split": "pnpm run clean && cross-env RUNTIME_ENV=production pnpm run --filter @unplugin-img-compress/build build:split",
+    "build:all": "pnpm run clean && cross-env RUNTIME_ENV=production pnpm run --filter @unplugin-img-compress/build build:all",
+    "prepublishOnly": "pnpm run build:all",
+    "release": "bumpp package.json --commit --push --tag && pnpm -r publish --access public",
+    "publish": "pnpm publish --no-git-checks --access public",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "clean": "rimraf dist",
+    "prepare": "husky install && pnpm run husky:step1 && pnpm run husky:step2",
+    "husky:step1": "npx husky add .husky/pre-commit \"npm exec lint-staged --allow-empty\"",
+    "husky:step2": "git add .husky/pre-commit && npx husky add .husky/commit-msg \"npx --no -- commitlint --edit $1\" && git add .husky/commit-msg",
+    "test": "vitest",
+    "test:update": "vitest -u",
+    "test:coverage": "vitest --coverage"
+  },
+  "peerDependencies": {
+    "chalk": "4.1.2",
+    "fs-extra": "^10.0.1",
+    "ora": "^6.1.2"
+  },
+  "dependencies": {
+    "chalk": "4.1.2",
+    "fs-extra": "^10.0.1",
+    "ora": "^6.1.2",
+    "unplugin": "^0.9.6"
+  },
+  "devDependencies": {
+    "@baiwusanyu/eslint-config": "^1.0.9",
+    "@changesets/cli": "^2.23.1",
+    "@commitlint/cli": "^16.2.1",
+    "@commitlint/config-conventional": "^16.2.1",
+    "@rollup/plugin-node-resolve": "^14.1.0",
+    "@types/fs-extra": "^9.0.13",
+    "@types/node": "^18.0.0",
+    "@unplugin-img-compress/build": "workspace:*",
+    "@unplugin-img-compress/core": "workspace:*",
+    "@unplugin-img-compress/entry": "workspace:*",
+    "@unplugin-img-compress/play": "workspace:*",
+    "@unplugin-img-compress/utils": "workspace:*",
+    "@vitest/coverage-c8": "^0.22.1",
+    "@vitest/ui": "0.22.1",
+    "bumpp": "^8.2.1",
+    "conventional-changelog-cli": "^2.2.2",
+    "cross-env": "^7.0.3",
+    "eslint": "8.18.0",
+    "esno": "^0.16.3",
+    "gulp": "^4.0.2",
+    "husky": "^7.0.4",
+    "jsdom": "^20.0.0",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.79.0",
+    "rollup-plugin-dts": "^4.2.1",
+    "rollup-plugin-typescript2": "^0.34.0",
+    "tsup": "^6.2.3",
+    "typescript": "^4.9.3",
+    "vitest": "0.22.1",
+    "vite": "^3.2.5"
+  },
+  "lint-staged": {
+    "*.{vue,js,ts,jsx,tsx,md,json}": [
+      "eslint ./ --fix",
+      "git add"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "@baiwusanyu"
+    ]
+  }
+}
