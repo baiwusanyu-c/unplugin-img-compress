@@ -1,6 +1,6 @@
 import { cwd } from 'node:process'
 import { describe, expect, it, vi } from 'vitest'
-import fs from 'fs-extra'
+import { pathExists, readFile, remove } from 'fs-extra'
 import { compressImgBundle, viteImgCompress } from '../index'
 import { jsonClone } from '../../../utils'
 import type { PluginOption } from 'vite'
@@ -39,11 +39,11 @@ describe('test core', () => {
     const testResImgDir = `${cwd()}/packages/core/__test__/test-res.png`
     const testResImgOutPutDir = `${cwd()}/packages/core/__test__/`
     const testImgDir = `${cwd()}/packages/core/__test__/test.png`
-    const isShouldClear = await fs.pathExists(testResImgDir)
+    const isShouldClear = await pathExists(testResImgDir)
     if (isShouldClear)
-      await fs.remove(testResImgDir)
+      await remove(testResImgDir)
 
-    const bufferRes = await fs.readFile(testImgDir)
+    const bufferRes = await readFile(testImgDir)
     const callFn = vi.fn()
     const tinifyFn = async(data: Uint8Array) => {
       callFn()
@@ -61,7 +61,7 @@ describe('test core', () => {
       tinifyFn,
     )
     expect(callFn).toBeCalled()
-    const exists = await fs.pathExists(testResImgDir)
+    const exists = await pathExists(testResImgDir)
     expect(exists).toBeTruthy()
   })
 })

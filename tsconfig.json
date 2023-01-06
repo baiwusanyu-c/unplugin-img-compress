@@ -10,19 +10,18 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
-    "skipLibCheck": true
+    "skipLibCheck": true,
   },
   "include": [
-    "/packages/**/*.ts",
-    "/packages/**/*.d.ts",
-    "/packages/**/*.tsx",
-    "/packages/**/*.vue",
-    "/utils/**/*.ts",
-    "/play/**/*.ts",
-    "/build/**/*.ts",
-    "/build/utils.ts"
+    "packages/**/*.ts",
+    "packages/**/*.d.ts",
+    "packages/**/*.tsx",
+    "packages/**/*.vue",
+    "utils/**/*.ts",
+    "play/**/*.ts",
+    "build/**/*.ts",
   ],
   // ts 排除的文件
-  "exclude": ["node_modules", "**/__tests__/"],
+  "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

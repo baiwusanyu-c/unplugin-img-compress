@@ -31,8 +31,9 @@
   "scripts": {
     "init": "pnpm i",
     "lint:fix": "eslint . --fix",
-    "dev:play:dev": "pnpm run --filter @unplugin-img-compress/play dev",
-    "dev:play:build": "pnpm run --filter @unplugin-img-compress/play build",
+    "dev": "pnpm run clean && pnpm run --filter @unplugin-img-compress/build dev",
+    "play:dev": "pnpm run --filter @unplugin-img-compress/play dev",
+    "play:build": "pnpm run --filter @unplugin-img-compress/play build",
     "build": "pnpm run clean && cross-env RUNTIME_ENV=production pnpm run --filter @unplugin-img-compress/build build",
     "prepublishOnly": "pnpm run build:all",
     "release": "bumpp package.json --commit --push --tag && pnpm -r publish --access public",

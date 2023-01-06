@@ -100,7 +100,12 @@ importers:
       '@types/node': 18.7.15
 
   packages/entry:
-    specifiers: {}
+    specifiers:
+      '@unplugin-img-compress/core': workspace:*
+      '@unplugin-img-compress/utils': workspace:*
+    dependencies:
+      '@unplugin-img-compress/core': link:../core
+      '@unplugin-img-compress/utils': link:../../utils
 
   play:
     specifiers:

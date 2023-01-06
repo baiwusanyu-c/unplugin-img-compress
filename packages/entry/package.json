@@ -9,5 +9,9 @@
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@unplugin-img-compress/core": "workspace:*",
+    "@unplugin-img-compress/utils": "workspace:*"
   }
 }
