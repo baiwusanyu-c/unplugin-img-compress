@@ -2,6 +2,7 @@ import * as process from 'process'
 import * as path from 'path'
 import { dest, parallel, src } from 'gulp'
 import { relativeDir } from './utils'
+import type { TaskFunction } from 'gulp'
 
 /**
  * Define the replacement dependency path here,
@@ -12,17 +13,17 @@ import { relativeDir } from './utils'
  * so after the packaging is completed, we Dependency paths need to be replaced
  */
 const distDirMap = {
-  '@unplugin-img-compress/utils': 'dist/utils/index[format]',
-  '@unplugin-img-compress/core': 'dist/core/index[format]',
+  '@unplugin-img-compress/utils': '../dist/utils/index[format]',
+  '@unplugin-img-compress/core': '../dist/core/index[format]',
 }
 const formatList = [
-  { runPath: path.resolve(process.cwd(), 'dist/**/*.js'), format: '.js' },
-  { runPath: path.resolve(process.cwd(), 'dist/**/*.cjs'), format: '.cjs' },
-  { runPath: path.resolve(process.cwd(), 'dist/**/*.d.ts'), format: '' },
+  { runPath: path.resolve(process.cwd(), '../dist/**/*.js'), format: '.js' },
+  { runPath: path.resolve(process.cwd(), '../dist/**/*.cjs'), format: '.cjs' },
+  { runPath: path.resolve(process.cwd(), '../dist/**/*.d.ts'), format: '' },
 ]
 
 export const parallelTask = () => {
-  const parallelTaskList = []
+  const parallelTaskList: TaskFunction[] = []
   formatList.forEach((formatVal) => {
     parallelTaskList.push(parallel(() => {
       return src(formatVal.runPath)
@@ -34,10 +35,11 @@ export const parallelTask = () => {
 
           for (const distDirMapKey in distDirMap) {
             // 生产要替换的依赖路径 @xxxx ->  ../xxxx
-            let targetPath = path.resolve(process.cwd(), distDirMap[distDirMapKey])
+            let targetPath = path.resolve(
+              process.cwd(),
+              distDirMap[distDirMapKey as keyof typeof distDirMap])
             // 替换格式后缀 .[format] -> .js / .cjs
             targetPath = targetPath.replace('[format]', formatVal.format)
-            // @ts-expect-error replaceAll can sue
             targetPath = targetPath.replaceAll('\\', '/')
 
             // 生产相对路径

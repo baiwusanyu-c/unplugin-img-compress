@@ -33,7 +33,7 @@ importers:
       rollup-plugin-dts: ^4.2.1
       rollup-plugin-typescript2: ^0.34.0
       tinify: ^1.7.1
-      tsup: ^6.2.3
+      tsup: ^6.5.0
       typescript: ^4.9.3
       unplugin: ^0.9.6
       vite: ^4.0.4
@@ -70,7 +70,7 @@ importers:
       rollup: 2.79.0
       rollup-plugin-dts: 4.2.3_yogkmenq7r5hk3iys2p7hk2zf4
       rollup-plugin-typescript2: 0.34.1_yogkmenq7r5hk3iys2p7hk2zf4
-      tsup: 6.2.3_typescript@4.9.4
+      tsup: 6.5.0_typescript@4.9.4
       typescript: 4.9.4
       vite: 4.0.4
       vitest: 0.22.1_mhpeshv4fcno2a74n6kgciqtjy
@@ -79,17 +79,22 @@ importers:
     specifiers:
       '@types/fs-extra': ^9.0.13
       '@types/node': ^18.0.0
+      '@unplugin-img-compress/core': workspace:*
+      '@unplugin-img-compress/utils': workspace:*
       cross-env: ^7.0.3
       rimraf: ^3.0.2
       sucrase: ^3.21.0
-      tsup: ^6.2.3
+      tsup: ^6.5.0
+    dependencies:
+      '@unplugin-img-compress/core': link:../packages/core
+      '@unplugin-img-compress/utils': link:../utils
     devDependencies:
       '@types/fs-extra': 9.0.13
       '@types/node': 18.7.15
       cross-env: 7.0.3
       rimraf: 3.0.2
       sucrase: 3.25.0
-      tsup: 6.2.3
+      tsup: 6.5.0
 
   packages/core:
     specifiers:
@@ -1915,13 +1920,13 @@ packages:
       semver: 7.3.7
     dev: true
 
-  /bundle-require/3.1.0_esbuild@0.15.7:
-    resolution: {integrity: sha512-IIXtAO7fKcwPHNPt9kY/WNVJqy7NDy6YqJvv6ENH0TOZoJ+yjpEsn1w40WKZbR2ibfu5g1rfgJTvmFHpm5aOMA==}
+  /bundle-require/3.1.2_esbuild@0.15.18:
+    resolution: {integrity: sha512-Of6l6JBAxiyQ5axFxUM6dYeP/W7X2Sozeo/4EYB9sJhL+dqL7TKjg+shwxp6jlu/6ZSERfsYtIpSJ1/x3XkAEA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     peerDependencies:
       esbuild: '>=0.13'
     dependencies:
-      esbuild: 0.15.7
+      esbuild: 0.15.18
       load-tsconfig: 0.2.3
     dev: true
 
@@ -7470,8 +7475,8 @@ packages:
     resolution: {integrity: sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==}
     dev: true
 
-  /tsup/6.2.3:
-    resolution: {integrity: sha512-J5Pu2Dx0E1wlpIEsVFv9ryzP1pZ1OYsJ2cBHZ7GrKteytNdzaSz5hmLX7/nAxtypq+jVkVvA79d7S83ETgHQ5w==}
+  /tsup/6.5.0:
+    resolution: {integrity: sha512-36u82r7rYqRHFkD15R20Cd4ercPkbYmuvRkz3Q1LCm5BsiFNUgpo36zbjVhCOgvjyxNBWNKHsaD5Rl8SykfzNA==}
     engines: {node: '>=14'}
     hasBin: true
     peerDependencies:
@@ -7486,17 +7491,17 @@ packages:
       typescript:
         optional: true
     dependencies:
-      bundle-require: 3.1.0_esbuild@0.15.7
+      bundle-require: 3.1.2_esbuild@0.15.18
       cac: 6.7.14
       chokidar: 3.5.3
       debug: 4.3.4
-      esbuild: 0.15.7
+      esbuild: 0.15.18
       execa: 5.1.1
       globby: 11.1.0
       joycon: 3.1.1
       postcss-load-config: 3.1.4
       resolve-from: 5.0.0
-      rollup: 2.79.0
+      rollup: 3.9.1
       source-map: 0.8.0-beta.0
       sucrase: 3.25.0
       tree-kill: 1.2.2
@@ -7505,8 +7510,8 @@ packages:
       - ts-node
     dev: true
 
-  /tsup/6.2.3_typescript@4.9.4:
-    resolution: {integrity: sha512-J5Pu2Dx0E1wlpIEsVFv9ryzP1pZ1OYsJ2cBHZ7GrKteytNdzaSz5hmLX7/nAxtypq+jVkVvA79d7S83ETgHQ5w==}
+  /tsup/6.5.0_typescript@4.9.4:
+    resolution: {integrity: sha512-36u82r7rYqRHFkD15R20Cd4ercPkbYmuvRkz3Q1LCm5BsiFNUgpo36zbjVhCOgvjyxNBWNKHsaD5Rl8SykfzNA==}
     engines: {node: '>=14'}
     hasBin: true
     peerDependencies:
@@ -7521,17 +7526,17 @@ packages:
       typescript:
         optional: true
     dependencies:
-      bundle-require: 3.1.0_esbuild@0.15.7
+      bundle-require: 3.1.2_esbuild@0.15.18
       cac: 6.7.14
       chokidar: 3.5.3
       debug: 4.3.4
-      esbuild: 0.15.7
+      esbuild: 0.15.18
       execa: 5.1.1
       globby: 11.1.0
       joycon: 3.1.1
       postcss-load-config: 3.1.4
       resolve-from: 5.0.0
-      rollup: 2.79.0
+      rollup: 3.9.1
       source-map: 0.8.0-beta.0
       sucrase: 3.25.0
       tree-kill: 1.2.2
