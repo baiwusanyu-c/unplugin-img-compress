@@ -2,6 +2,7 @@ import { outputFile } from 'fs-extra'
 import { extend, formatSizeUnits, log } from '@unplugin-img-compress/utils'
 import tinify from 'tinify'
 import { createUnplugin } from 'unplugin'
+import chalk from 'chalk'
 import { defaultOption } from './default-option'
 import type { PluginOption } from 'vite'
 import type { CompressOption, IBundle } from './types'
@@ -31,18 +32,17 @@ export const compressImgBundle = async(
       const fileName = bundle[key].fileName
       const bufferSource = bundle[key].source as Uint8Array
       // 压缩
-      log('info',
-            `compression start:[${fileName}][${formatSizeUnits(bufferSource.byteLength)}]`,
-      )
       const tinifyBufferRes = (await tinify(bufferSource, APIKey)) as Uint8Array
-      log('success',
-            `compression complete:[${fileName}][${formatSizeUnits(tinifyBufferRes.byteLength)}]`,
-      )
       // 写入
       await outputFile(`${outputDir}/${fileName}`, tinifyBufferRes)
-      log('success',
-            `write complete:[${fileName}][${formatSizeUnits(tinifyBufferRes.byteLength)}]`,
-      )
+
+      console.log(
+        chalk.greenBright.bold('compression complete'),
+        chalk.blueBright.bold(`[${fileName}]`))
+      console.log(
+        chalk.yellowBright.bold(`[${formatSizeUnits(bufferSource.byteLength)}]`),
+        '->',
+        chalk.greenBright.bold(`[${formatSizeUnits(tinifyBufferRes.byteLength)}]`))
     }
   }
 }
