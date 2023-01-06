@@ -40,6 +40,7 @@ if (buildMode === 'dev') {
     config.outDir = entryKey === 'index'
       ? path.resolve(process.cwd(), '../dist') : path.resolve(process.cwd(), `../dist/${entryKey}`)
     config.dts = true
+    config.watch = true
     config.noExternal = [/@unplugin-img-compress/]
     configOptions.push(config)
   }

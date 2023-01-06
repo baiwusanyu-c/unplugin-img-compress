@@ -1,5 +1,9 @@
 import { outputFile } from 'fs-extra'
-import { extend, formatSizeUnits, log } from '@unplugin-img-compress/utils'
+import {
+  extend,
+  formatSizeUnits,
+  log,
+} from '@unplugin-img-compress/utils'
 import tinify from 'tinify'
 import { createUnplugin } from 'unplugin'
 import chalk from 'chalk'
@@ -37,10 +41,10 @@ export const compressImgBundle = async(
       await outputFile(`${outputDir}/${fileName}`, tinifyBufferRes)
 
       console.log(
-        chalk.greenBright.bold('compression complete'),
+        chalk.greenBright.bold('✔ : compression complete'),
         chalk.blueBright.bold(`[${fileName}]`))
       console.log(
-        chalk.yellowBright.bold(`[${formatSizeUnits(bufferSource.byteLength)}]`),
+        chalk.yellowBright.bold(`✅ : [${formatSizeUnits(bufferSource.byteLength)}]`),
         '->',
         chalk.greenBright.bold(`[${formatSizeUnits(tinifyBufferRes.byteLength)}]`))
     }
@@ -59,10 +63,11 @@ const unplugin = createUnplugin((option: CompressOption) => {
 
   return {
     name: 'unplugin-img-compress',
+    // mode = build
     async writeBundle(
       outputOptions: OutputOptions,
       bundle: IBundle) {
-      log('info', 'unplugin-img-compress running...')
+      log('info', '✨ : unplugin-img-compress running...')
       if (option.runtime === 'build' && option.compressImgBundle) {
         const outputDir = outputOptions.dir!.replaceAll('\\', '/')
         await option.compressImgBundle(outputDir, option.APIKey, bundle)
