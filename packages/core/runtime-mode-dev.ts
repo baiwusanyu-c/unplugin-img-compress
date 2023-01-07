@@ -1,9 +1,9 @@
 import * as path from 'path'
 import { isSupportImg, log } from '@unplugin-img-compress/utils'
-import fs, { pathExists, remove } from 'fs-extra'
+import fs, { pathExists, remove, writeJson } from 'fs-extra'
 import { initOption } from './option'
 import type { AssetInfo, CompressOption, IBundle } from './types'
-
+const IMG_TINIFY_RECORD = 'IMG_TINIFY_RECORD.json'
 const getImgFilePath = async(
   filePath: string,
   fileList: Record<string, string> = {}) => {
@@ -38,8 +38,14 @@ async function getImgFileBundle(fileList: Record<string, string>) {
   }
   return bundle
 }
+
+const createRecord = (recordContent: Record<string, string>) => {
+  writeJson(`${path.resolve()}/${IMG_TINIFY_RECORD}`, recordContent)
+}
+
 export async function compressImg(option: CompressOption) {
   const optionInner = initOption(option)
+
   if (!optionInner) {
     log('error', 'Please configure APIKey for tinypng compression....\nSee: https://tinypng.com/')
     return
@@ -51,8 +57,10 @@ export async function compressImg(option: CompressOption) {
 
   log('info', '✨ : unplugin-img-compress running...[runtime dev]')
 
-  const rootFile = path.resolve('img_tinify_record.js')
+  const rootFile = path.resolve(IMG_TINIFY_RECORD)
   const targetDir = optionInner.dir
+  let bundle = {}
+  const fileList: Record<string, string> = {}
   // 判断是否存在 cache
   const isExistRecord = await pathExists(rootFile)
   // 根据 cache 对比当前目录
@@ -60,21 +68,24 @@ export async function compressImg(option: CompressOption) {
 
   } else {
     // 不存在则直接开始读取目标文件夹下图片压缩，并记录
-    const fileList: Record<string, string> = {}
     // 读取文件
     await getImgFilePath(targetDir, fileList)
-    const bundle = await getImgFileBundle(fileList)
-    optionInner.compressImgBundle && await optionInner.compressImgBundle(
-      '',
-      optionInner.APIKey,
-      bundle,
-    )
+    bundle = await getImgFileBundle(fileList)
+    // 存储缓存
+    createRecord(fileList)
   }
+
+  // 压缩
+  optionInner.compressImgBundle && await optionInner.compressImgBundle(
+    '',
+    optionInner.APIKey,
+    bundle,
+  )
+
   // mode = watch 开启监听
   if (optionInner.mode === 'watch') {
-
+    // 更新缓存文件
   }
-  // 更新缓存文件
 
   // once 模式，生成 cache 文件，
   // 再次运行-》对比cache-》增加 -》 对目标文件压缩-》 更新 cache 文件
