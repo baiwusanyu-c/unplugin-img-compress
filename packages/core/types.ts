@@ -19,11 +19,11 @@ export interface CompressOption{
   compressImgBundle?: compressImgBundle
 }
 export interface AssetInfo {
-  name: string | undefined
   source: string | Uint8Array
-  type: 'asset'
   fileName: string
+  type: 'asset'
   isAsset: true
+  name: string | undefined
 }
 
 export type IBundle = Record<string, AssetInfo>

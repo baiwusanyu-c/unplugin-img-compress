@@ -33,3 +33,5 @@ export function formatSizeUnits(bytes: number): string {
 export function jsonClone<T>(val: T): T {
   return JSON.parse(JSON.stringify(val))
 }
+
+export const isSupportImg = (key: string) => /\.(png|jpg|gif|jpeg|svg)$/i.test(key)

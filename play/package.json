@@ -5,7 +5,8 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "vite --host ",
-    "build": "vite build",
+    "runtime:dev": "esno play-runtime-dev.ts",
+    "runtime:build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
