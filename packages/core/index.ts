@@ -8,9 +8,11 @@ import tinify from 'tinify'
 import { createUnplugin } from 'unplugin'
 import chalk from 'chalk'
 import { defaultOption } from './default-option'
+import type { UnpluginOptions } from 'unplugin'
 import type { PluginOption } from 'vite'
 import type { CompressOption, IBundle } from './types'
 import type { OutputOptions } from 'rollup'
+import {writeBundle} from "./types";
 
 export const tinifyBuffer = (data: Uint8Array, APIKey: string) => {
   tinify.key = APIKey
@@ -50,31 +52,36 @@ export const compressImgBundle = async(
     }
   }
 }
-const unplugin = createUnplugin((option: CompressOption) => {
-  option = extend(defaultOption, option)
-  if (!option.APIKey) {
-    log('error', 'Please configure APIKey for tinypng compression....\nSee: https://tinypng.com/')
+const unplugin = createUnplugin(
+  (option: CompressOption): UnpluginOptions & { writeBundle?: writeBundle } => {
+    option = extend(defaultOption, option)
+    if (!option.APIKey) {
+      log('error', 'Please configure APIKey for tinypng compression....\nSee: https://tinypng.com/')
+      return {
+        name: 'unplugin-img-compress',
+      }
+    }
+    if (!option.compressImgBundle)
+      option.compressImgBundle = compressImgBundle
+
     return {
       name: 'unplugin-img-compress',
+      load(id) {
+        console.log(id)
+        return undefined
+      },
+      // mode = build
+      async writeBundle(
+        outputOptions: OutputOptions,
+        bundle: IBundle) {
+        log('info', '✨ : unplugin-img-compress running...')
+        if (option.runtime === 'build' && option.compressImgBundle) {
+          const outputDir = outputOptions.dir!.replaceAll('\\', '/')
+          await option.compressImgBundle(outputDir, option.APIKey, bundle)
+        }
+      },
     }
-  }
-  if (!option.compressImgBundle)
-    option.compressImgBundle = compressImgBundle
-
-  return {
-    name: 'unplugin-img-compress',
-    // mode = build
-    async writeBundle(
-      outputOptions: OutputOptions,
-      bundle: IBundle) {
-      log('info', '✨ : unplugin-img-compress running...')
-      if (option.runtime === 'build' && option.compressImgBundle) {
-        const outputDir = outputOptions.dir!.replaceAll('\\', '/')
-        await option.compressImgBundle(outputDir, option.APIKey, bundle)
-      }
-    },
-  }
-})
+  })
 
 export const viteImgCompress: (option: CompressOption) => PluginOption = unplugin.vite
 export const rollupImgCompress = unplugin.rollup
