@@ -1,8 +1,11 @@
 import * as path from 'path'
+import { cwd } from 'node:process'
 import { isSupportImg, log } from '@unplugin-img-compress/utils'
-import fs, { pathExists, remove, writeJson } from 'fs-extra'
+import fs, { pathExists } from 'fs-extra'
+import chokidar from 'chokidar'
 import { initOption } from './option'
 import type { AssetInfo, CompressOption, IBundle } from './types'
+
 const IMG_TINIFY_RECORD = 'IMG_TINIFY_RECORD.json'
 const getImgFilePath = async(
   filePath: string,
@@ -39,8 +42,45 @@ async function getImgFileBundle(fileList: Record<string, string>) {
   return bundle
 }
 
-const createRecord = (recordContent: Record<string, string>) => {
-  writeJson(`${path.resolve()}/${IMG_TINIFY_RECORD}`, recordContent)
+const createRecord = async(recordContent: Record<string, string>) => {
+  await fs.writeJson(`${path.resolve()}/${IMG_TINIFY_RECORD}`, recordContent, { spaces: 2 })
+}
+
+const updateRecord = async(
+  evt: 'add' | 'unlink',
+  targetPath: string,
+  recordContent: Record<string, string>) => {
+  if (evt === 'unlink') {
+    Reflect.deleteProperty(recordContent, targetPath)
+  } else {
+    const arr = targetPath.split('/')
+    recordContent[targetPath] = arr[arr.length - 1]
+  }
+  await fs.writeJson(`${path.resolve()}/${IMG_TINIFY_RECORD}`, recordContent, { spaces: 2 })
+}
+
+const patchFiles = async(fl1: Record<string, string>, fl2: Record<string, string>) => {
+  const res = fl1
+  const oFlKeys = Object.keys(fl1)
+  const nFlkeys = Object.keys(fl2)
+  const addFiles: Record<string, string> = {}
+  for (let j = 0; j < nFlkeys.length; j++) {
+    // 新增
+    if (!fl1[nFlkeys[j]]) {
+      res[nFlkeys[j]] = fl2[nFlkeys[j]]
+      addFiles[nFlkeys[j]] = fl2[nFlkeys[j]]
+    }
+  }
+
+  for (let j = 0; j < oFlKeys.length; j++) {
+    // 删除
+    if (!fl2[oFlKeys[j]])
+      Reflect.deleteProperty(res, oFlKeys[j])
+  }
+  return {
+    fileList: res,
+    bundle: await getImgFileBundle(addFiles),
+  }
 }
 
 export async function compressImg(option: CompressOption) {
@@ -60,21 +100,21 @@ export async function compressImg(option: CompressOption) {
   const rootFile = path.resolve(IMG_TINIFY_RECORD)
   const targetDir = optionInner.dir
   let bundle = {}
-  const fileList: Record<string, string> = {}
+  let fileList: Record<string, string> = {}
+  await getImgFilePath(targetDir, fileList)
   // 判断是否存在 cache
   const isExistRecord = await pathExists(rootFile)
   // 根据 cache 对比当前目录
   if (isExistRecord) {
-
+    const recordJson = await fs.readJson(`${path.resolve()}/${IMG_TINIFY_RECORD}`)
+    const patchRes = await patchFiles(recordJson, fileList)
+    fileList = patchRes.fileList
+    bundle = patchRes.bundle
   } else {
-    // 不存在则直接开始读取目标文件夹下图片压缩，并记录
-    // 读取文件
-    await getImgFilePath(targetDir, fileList)
     bundle = await getImgFileBundle(fileList)
-    // 存储缓存
-    createRecord(fileList)
   }
-
+  // 存储缓存
+  await createRecord(fileList)
   // 压缩
   optionInner.compressImgBundle && await optionInner.compressImgBundle(
     '',
@@ -83,8 +123,36 @@ export async function compressImg(option: CompressOption) {
   )
 
   // mode = watch 开启监听
+  let isInit = 0
   if (optionInner.mode === 'watch') {
-    // 更新缓存文件
+    chokidar.watch(path.resolve(cwd(), targetDir), {
+      atomic: true,
+      followSymlinks: true,
+    }).on('all', async(event: string, pathDir: string) => {
+      if (isSupportImg(pathDir)) {
+        if (isInit < Object.keys(fileList).length) {
+          isInit++
+          return
+        }
+        const arr = pathDir.split('/')
+        switch (event) {
+          case 'add':
+            await updateRecord(event, pathDir, fileList)
+            optionInner.compressImgBundle && await optionInner.compressImgBundle(
+              '',
+              optionInner.APIKey,
+              await getImgFileBundle({ [pathDir]: arr[arr.length - 1] }),
+            )
+            break
+          case 'unlink':
+            updateRecord(event, pathDir, fileList)
+            break
+          case 'change': // TODO
+          default:
+            break
+        }
+      }
+    })
   }
 
   // once 模式，生成 cache 文件，

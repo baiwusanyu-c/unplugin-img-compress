@@ -19,6 +19,7 @@ importers:
       '@vitest/ui': 0.22.1
       bumpp: ^8.2.1
       chalk: 4.1.2
+      chokidar: ^3.5.3
       conventional-changelog-cli: ^2.2.2
       cross-env: ^7.0.3
       eslint: 8.18.0
@@ -40,6 +41,7 @@ importers:
       vitest: 0.22.1
     dependencies:
       chalk: 4.1.2
+      chokidar: 3.5.3
       fs-extra: 10.1.0
       ora: 6.1.2
       tinify: 1.7.1
@@ -1013,6 +1015,7 @@ packages:
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
     requiresBuild: true
     dev: true
     optional: true
@@ -1022,6 +1025,7 @@ packages:
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
     requiresBuild: true
     dev: true
     optional: true
@@ -1031,6 +1035,7 @@ packages:
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
     requiresBuild: true
     dev: true
     optional: true
@@ -1040,6 +1045,7 @@ packages:
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
     requiresBuild: true
     dev: true
     optional: true
