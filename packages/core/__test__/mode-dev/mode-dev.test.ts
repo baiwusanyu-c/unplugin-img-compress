@@ -2,7 +2,7 @@ import { cwd } from 'node:process'
 import path from 'path'
 import { describe, expect, it, vi } from 'vitest'
 import { jsonClone } from '@unplugin-img-compress/utils'
-import fs, { pathExists } from 'fs-extra'
+import fs, { outputFile, pathExists, readFile } from 'fs-extra'
 import { clearRecord, devCompressImg } from '../../index'
 import type { CompressOption } from '../../types'
 const recordPath = `${path.resolve()}/IMG_TINIFY_RECORD.json`
@@ -53,6 +53,17 @@ describe('test mode dev', () => {
     const opt = jsonClone(option)
     opt.dir = `${cwd()}/packages/core/__test__/mode-dev/`.replaceAll('\\', '/')
     opt.compressImgBundle = async() => {}
+
+    // mock add
+    const testImgDir = `${cwd()}/packages/core/__test__/mode-dev/test.png`
+    const bufferRes = await readFile(testImgDir)
+    await outputFile(`${opt.dir}/test-res.png`, bufferRes)
+
+    await devCompressImg(opt)
+    isExistRecord = await pathExists(recordPath)
+    expect(isExistRecord).toBeTruthy()
+    const recordJson = await fs.readJson(recordPath)
+    expect(recordJson[`${opt.dir}test-res.png`]).toBe('test-res.png')
   })
 
   it('cache by once & delete', async() => {
