@@ -34,9 +34,11 @@ describe('test mode dev', () => {
     await clearRecord()
     let isExistRecord = await pathExists(recordPath)
     expect(isExistRecord).not.toBeTruthy()
+
     const opt = jsonClone(option)
     opt.dir = `${cwd()}/packages/core/__test__/mode-dev/`.replaceAll('\\', '/')
     opt.compressImgBundle = async() => {}
+
     await devCompressImg(opt)
     isExistRecord = await pathExists(recordPath)
     expect(isExistRecord).toBeTruthy()
@@ -45,7 +47,12 @@ describe('test mode dev', () => {
   })
 
   it('cache by once & add', async() => {
+    let isExistRecord = await pathExists(recordPath)
+    expect(isExistRecord).toBeTruthy()
 
+    const opt = jsonClone(option)
+    opt.dir = `${cwd()}/packages/core/__test__/mode-dev/`.replaceAll('\\', '/')
+    opt.compressImgBundle = async() => {}
   })
 
   it('cache by once & delete', async() => {
