@@ -106,7 +106,9 @@ export async function compressImg(option: CompressOption) {
   const targetDir = optionInner.dir
   let bundle = {}
   let fileList: Record<string, string> = {}
-  await getImgFilePath(targetDir, fileList)
+  for (let i = 0; i < targetDir.length; i++)
+    await getImgFilePath(targetDir[i], fileList)
+
   // 判断是否存在 cache
   const isExistRecord = await pathExists(rootFile)
   // 根据 cache 对比当前目录
@@ -130,7 +132,8 @@ export async function compressImg(option: CompressOption) {
   // mode = watch 开启监听
   let isInit = 0
   if (optionInner.mode === 'watch') {
-    chokidar.watch(path.resolve(cwd(), targetDir), {
+    const targetArr = (targetDir as Array<string>).map(val => path.resolve(cwd(), val))
+    chokidar.watch(targetArr, {
       atomic: true,
       followSymlinks: true,
     }).on('all', async(event: string, pathDir: string) => {
