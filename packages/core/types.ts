@@ -9,7 +9,7 @@ export declare type writeBundle = (outputOptions: OutputOptions, bundle: IBundle
 export interface CompressOption{
   //  tinypng 的 APIkey
   APIKey: string
-  // 运行时机，是在开发时压缩，还是打包时压缩
+  // 图片模板文件夹路径
   dir: string
   // 运行时机，是在开发时压缩，还是打包时压缩
   runtime: 'build' | 'dev'
