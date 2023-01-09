@@ -5,7 +5,9 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "vite --host ",
-    "build": "tsc && vite build",
+    "runtime:dev": "esno play-runtime-dev.ts",
+    "runtime:build": "vite build",
+    "dev:cli": "pnpm unp-img -c",
     "preview": "vite preview"
   },
   "dependencies": {

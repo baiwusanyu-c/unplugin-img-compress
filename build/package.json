@@ -7,9 +7,14 @@
   "license": "ISC",
   "author": "",
   "scripts": {
-    "build": "cross-env BUILD_MODE=split tsup-node --config index.ts && pnpm run rewrite",
+    "dev": "cross-env BUILD_MODE=dev tsup-node --config index.ts",
+    "build": "cross-env BUILD_MODE=prod tsup-node --config index.ts && pnpm run rewrite",
     "rewrite": "gulp -require sucrase/register/ts -f gulp-file.ts",
     "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "@unplugin-img-compress/core": "workspace:*",
+    "@unplugin-img-compress/utils": "workspace:*"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
@@ -17,6 +22,6 @@
     "cross-env": "^7.0.3",
     "rimraf": "^3.0.2",
     "sucrase": "^3.21.0",
-    "tsup": "^6.2.3"
+    "tsup": "^6.5.0"
   }
 }

@@ -1,5 +1,5 @@
 import { spawn } from 'child_process'
-import path from 'path'
+import * as path from 'path'
 
 export function relativeDir(relative: string, absolute: string) {
   const rela = relative.split('/')
@@ -26,9 +26,9 @@ export function relativeDir(relative: string, absolute: string) {
   return str
 }
 
-export const r = (...args) => path.resolve(__dirname, '..', ...args)
+export const r = (...args: any[]) => path.resolve(__dirname, '..', ...args)
 
-export const run = async(command) => {
+export const run = async(command: string) => {
   return new Promise((resolve) => {
     const [cmd, ...args] = command.split(' ')
     const app = spawn(cmd, args, {

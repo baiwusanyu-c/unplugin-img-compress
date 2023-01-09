@@ -1,3 +1,10 @@
+import type { OutputOptions } from 'rollup'
+
+export declare type compressImgBundle = (
+  outputOptions: string,
+  APIKey: string,
+  bundle: IBundle) => Promise<void>
+export declare type writeBundle = (outputOptions: OutputOptions, bundle: IBundle) => Promise<void>
 
 export interface CompressOption{
   //  tinypng 的 APIkey
@@ -9,17 +16,14 @@ export interface CompressOption{
   // 文件监听模式，watch 仅在 runtime 为 dev 时有效
   mode: 'watch' | 'once'
   // 压缩方法
-  compressImgBundle?: (
-    outputOptions: string,
-    APIKey: string,
-    bundle: IBundle) => Promise<void>
+  compressImgBundle?: compressImgBundle
 }
 export interface AssetInfo {
-  name: string | undefined
   source: string | Uint8Array
-  type: 'asset'
   fileName: string
+  type: 'asset'
   isAsset: true
+  name: string | undefined
 }
 
 export type IBundle = Record<string, AssetInfo>

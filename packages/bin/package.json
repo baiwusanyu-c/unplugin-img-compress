@@ -1,5 +1,5 @@
 {
-  "name": "@unplugin-img-compress/entry",
+  "name": "@unplugin-img-compress/bin",
   "description": "",
   "type": "module",
   "version": "1.0.0",
@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@unplugin-img-compress/core": "workspace:*",
+    "@unplugin-img-compress/entry": "workspace:*",
     "@unplugin-img-compress/utils": "workspace:*"
   }
 }
