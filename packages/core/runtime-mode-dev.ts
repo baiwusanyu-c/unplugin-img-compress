@@ -27,7 +27,8 @@ const getImgFilePath = async(
     if (isDir) await getImgFilePath(fileDir, fileList)
   }
 }
-async function getImgFileBundle(fileList: Record<string, string>) {
+
+export async function getImgFileBundle(fileList: Record<string, string>) {
   const bundle = {} as IBundle
   for (const key in fileList) {
     const source = await fs.readFile(key)
@@ -46,7 +47,7 @@ const createRecord = async(recordContent: Record<string, string>) => {
   await fs.writeJson(`${path.resolve()}/${IMG_TINIFY_RECORD}`, recordContent, { spaces: 2 })
 }
 
-const updateRecord = async(
+export const updateRecord = async(
   evt: 'add' | 'unlink',
   targetPath: string,
   recordContent: Record<string, string>) => {
@@ -64,7 +65,7 @@ export const clearRecord = async() => {
   log('success', `delete ${IMG_TINIFY_RECORD}.json success !`)
 }
 
-const patchFiles = async(fl1: Record<string, string>, fl2: Record<string, string>) => {
+export const patchFiles = async(fl1: Record<string, string>, fl2: Record<string, string>) => {
   const res = fl1
   const oFlKeys = Object.keys(fl1)
   const nFlkeys = Object.keys(fl2)
