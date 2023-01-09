@@ -1,6 +1,6 @@
 {
   "name": "unplugin-img-compress",
-  "description": "",
+  "description": "Image compression plugin based on tinypng",
   "private": false,
   "version": "1.0.1",
   "packageManager": "pnpm@6.32.4",
