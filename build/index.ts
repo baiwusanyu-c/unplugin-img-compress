@@ -18,6 +18,7 @@ if (buildMode === 'prod') {
   entry = {
     index: '../packages/entry/index.ts',
     core: '../packages/core/index.ts',
+    bin: '../packages/bin/index.ts',
     utils: '../utils/index.ts',
   }
   for (const entryKey in entry) {

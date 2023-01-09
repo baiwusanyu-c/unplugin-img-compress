@@ -1,7 +1,7 @@
 import * as path from 'path'
 import { cwd } from 'node:process'
 import { isSupportImg, log } from '@unplugin-img-compress/utils'
-import fs, { pathExists } from 'fs-extra'
+import fs, { pathExists, remove } from 'fs-extra'
 import chokidar from 'chokidar'
 import { initOption } from './option'
 import type { AssetInfo, CompressOption, IBundle } from './types'
@@ -57,6 +57,11 @@ const updateRecord = async(
     recordContent[targetPath] = arr[arr.length - 1]
   }
   await fs.writeJson(`${path.resolve()}/${IMG_TINIFY_RECORD}`, recordContent, { spaces: 2 })
+}
+
+export const clearRecord = async() => {
+  await remove(`${path.resolve()}/${IMG_TINIFY_RECORD}`)
+  log('success', `delete ${IMG_TINIFY_RECORD}.json success !`)
 }
 
 const patchFiles = async(fl1: Record<string, string>, fl2: Record<string, string>) => {

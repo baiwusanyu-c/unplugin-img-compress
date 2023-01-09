@@ -1,12 +1,19 @@
 build once 🐕
 
-dev watch
+dev watch 🐕
 
-// once 模式，生成 cache 文件，
-// 再次运行-》对比cache-》增加 -》 对目标文件压缩-》 更新 cache 文件
-// 再次运行-》对比cache-》删除 -》  更新 cache 文件
+清除 record 🐕
 
-dev once
-// watch 模式，生成 cache 文件，监听目标目录文件变化
-// 监听到文件变化-》对比cache-》增加 -》 对目标文件压缩-》 更新 cache 文件
-// 监听到文件变化-》对比cache-》删除 -》  更新 cache 文件
+cli 🐕
+
+单测
+
+README
+```shell
+pnpm unp-img     
+✨ : unplugin-img-compress running...[runtime dev]
+✔ : compression complete [11.png]
+✅ : [74.31 KB] -> [74.31 KB]
+✔ : compression complete [12.png]
+✅ : [74.41 KB] -> [74.31 KB]
+```

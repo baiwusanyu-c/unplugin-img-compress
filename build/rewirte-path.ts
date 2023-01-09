@@ -15,6 +15,7 @@ import type { TaskFunction } from 'gulp'
 const distDirMap = {
   '@unplugin-img-compress/utils': '../dist/utils/index[format]',
   '@unplugin-img-compress/core': '../dist/core/index[format]',
+  '@unplugin-img-compress/bin': '../dist/bin/index[format]',
 }
 const formatList = [
   { runPath: path.resolve(process.cwd(), '../dist/**/*.js'), format: '.js' },

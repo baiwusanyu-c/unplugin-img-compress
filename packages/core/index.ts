@@ -6,4 +6,4 @@ export {
   webpackImgCompress,
 } from './runtime-mode-build'
 
-export { compressImg as devCompressImg } from './runtime-mode-dev'
+export { compressImg as devCompressImg, clearRecord } from './runtime-mode-dev'
