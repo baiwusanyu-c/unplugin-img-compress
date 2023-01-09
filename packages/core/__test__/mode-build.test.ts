@@ -14,7 +14,7 @@ const option = {
   mode: 'once',
 } as CompressOption
 
-describe('test core', () => {
+describe('test mode dev', () => {
   it('no APIKey', () => {
     const opt = jsonClone(option)
     opt.APIKey = ''
@@ -64,5 +64,9 @@ describe('test core', () => {
     expect(callFn).toBeCalled()
     const exists = await pathExists(testResImgDir)
     expect(exists).toBeTruthy()
+  })
+
+  it('compressImgBundle', async() => {
+
   })
 })

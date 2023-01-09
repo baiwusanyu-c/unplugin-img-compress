@@ -124,7 +124,7 @@ build({
 ```typescript
 export interface CompressOption{
   APIKey: string
-  dir: string
+  dir: string | string[]
   runtime: 'build' | 'dev'
   mode: 'watch' | 'once'
 }

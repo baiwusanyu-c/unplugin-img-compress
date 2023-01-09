@@ -10,7 +10,7 @@ export interface CompressOption{
   //  tinypng 的 APIkey
   APIKey: string
   // 图片模板文件夹路径
-  dir: string
+  dir: string | Array<string>
   // 运行时机，是在开发时压缩，还是打包时压缩
   runtime: 'build' | 'dev'
   // 文件监听模式，watch 仅在 runtime 为 dev 时有效
