@@ -4,10 +4,10 @@
 基于 tinypng 的图片压缩插件
 ```shell
 ✨ : unplugin-img-compress running...[runtime dev]
-✔ : compression complete [11.png]
-✅ : [74.31 KB] -> [74.31 KB]
-✔ : compression complete [12.png]
-✅ : [74.41 KB] -> [74.31 KB]
+✔ : compression complete [test1.png]
+✅ : [74.31 KB] -> [66.64 KB]
+✔ : compression complete [test2.png]
+✅ : [86.52 KB] -> [76.64 KB]
 ```
 
 ## Feature(特性)
@@ -165,10 +165,10 @@ export default {
 ```shell
 pnpm unp-img
 ✨ : unplugin-img-compress running...[runtime dev]
-✔ : compression complete [11.png]
-✅ : [74.31 KB] -> [74.31 KB]
-✔ : compression complete [12.png]
-✅ : [74.41 KB] -> [74.31 KB]
+✔ : compression complete [test1.png]
+✅ : [74.31 KB] -> [66.64 KB]
+✔ : compression complete [test2.png]
+✅ : [86.52 KB] -> [76.64 KB]
 ```
 当脚本运行完成后，会在项目根目录创建一个记录文件`IMG_TINIFY_RECORD.json`
 

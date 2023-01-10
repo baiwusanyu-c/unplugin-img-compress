@@ -4,10 +4,10 @@ English | [中文](https://github.com/baiwusanyu-c/unplugin-img-compress/blob/ma
 Image compression plugin based on tinypng
 ```shell
 ✨ : unplugin-img-compress running...[runtime dev]
-✔ : compression complete [11.png]
-✅ : [74.31 KB] -> [74.31 KB]
-✔ : compression complete [12.png]
-✅ : [74.41 KB] -> [74.31 KB]
+✔ : compression complete [test1.png]
+✅ : [74.31 KB] -> [66.64 KB]
+✔ : compression complete [test2.png]
+✅ : [86.52 KB] -> [76.64 KB]
 ```
 
 ## Feature
@@ -169,10 +169,10 @@ Its configuration is no different, except here you need to set `runtime` to `dev
 ```shell
 pnpm unp-img
 ✨ : unplugin-img-compress running...[runtime dev]
-✔ : compression complete [11.png]
-✅ : [74.31 KB] -> [74.31 KB]
-✔ : compression complete [12.png]
-✅ : [74.41 KB] -> [74.31 KB]
+✔ : compression complete [test1.png]
+✅ : [74.31 KB] -> [66.64 KB]
+✔ : compression complete [test2.png]
+✅ : [86.52 KB] -> [76.64 KB]
 ```
 When the script finishes running, a record file `IMG_TINIFY_RECORD.json` will be created in the project root directory
 
