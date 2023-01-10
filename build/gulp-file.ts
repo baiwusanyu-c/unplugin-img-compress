@@ -19,7 +19,7 @@ const movePkgToRootDist = async() => {
   Reflect.deleteProperty(content, 'devDependencies')
   Reflect.deleteProperty(content, 'eslintConfig')
   content.scripts = {
-    publish: 'pnpm -r publish --no-git-checks --access public',
+    publish: 'pnpm publish --no-git-checks --access public',
   }
   await fs.writeJson(`${pkgPathToRoot}/package.json`, content, { spaces: 2 })
 }

@@ -47,7 +47,7 @@
     "play:runtime-dev": "pnpm run --filter @unplugin-img-compress/play runtime:dev",
     "build": "pnpm run clean && pnpm run --filter @unplugin-img-compress/build build",
     "release": "bumpp package.json --commit --push --tag && pnpm run build && pnpm run dist publish",
-    "publish": "pnpm -r publish --no-git-checks --access public",
+    "publish": "pnpm publish --no-git-checks --access public",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "clean": "rimraf dist",
     "prepare": "husky install",
