@@ -4,15 +4,13 @@ import fs, { copySync } from 'fs-extra'
 import pkg from '../package.json'
 import { run } from './utils'
 import { parallelTask } from './rewirte-path'
-
+const distRoot = path.resolve(process.cwd(), '../dist')
 const moveDistToRoot = async() => {
   const distPathInBuild = path.resolve(process.cwd(), 'dist')
-  const distPathToRoot = path.resolve(process.cwd(), '../dist')
-  await copySync(distPathInBuild, distPathToRoot)
+  await copySync(distPathInBuild, distRoot)
 }
 
 const movePkgToRootDist = async() => {
-  const pkgPathToRoot = path.resolve(process.cwd(), '../dist')
   const content = JSON.parse(JSON.stringify(pkg))
   Reflect.deleteProperty(content, 'scripts')
   Reflect.deleteProperty(content, 'lint-staged')
@@ -21,8 +19,14 @@ const movePkgToRootDist = async() => {
   content.scripts = {
     publish: 'pnpm publish --no-git-checks --access public',
   }
-  await fs.writeJson(`${pkgPathToRoot}/package.json`, content, { spaces: 2 })
+  await fs.writeJson(`${distRoot}/package.json`, content, { spaces: 2 })
 }
+
+const moveReadMeToRootDist = async() => {
+  await fs.copy(`${path.resolve('../README.md')}`, `${distRoot}/README.md`)
+  await fs.copy(`${path.resolve('../README-CN.md')}`, `${distRoot}/README-CN.md`)
+}
+
 export default series(
   ...parallelTask(),
   // 移动dist
@@ -33,6 +37,11 @@ export default series(
   // 移动 package.json 到 dist
   async() => {
     const res = await movePkgToRootDist()
+    return res
+  },
+  // 移动 readme 到 dist
+  async() => {
+    const res = await moveReadMeToRootDist()
     return res
   },
   // 删build目录下dist
