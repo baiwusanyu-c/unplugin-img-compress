@@ -1,3 +1,20 @@
+## [1.0.5](https://github.com/baiwusanyu-c/unplugin-img-compress/compare/v1.0.4...v1.0.5) (2023-01-11)
+
+
+### Bug Fixes
+
+* fix support img type error ([184556e](https://github.com/baiwusanyu-c/unplugin-img-compress/commit/184556ebcaa30343847731d81faead92dcc7e608))
+
+
+
+## [1.0.4](https://github.com/baiwusanyu-c/unplugin-img-compress/compare/v1.0.3...v1.0.4) (2023-01-10)
+
+
+
+## [1.0.3](https://github.com/baiwusanyu-c/unplugin-img-compress/compare/v1.0.2...v1.0.3) (2023-01-10)
+
+
+
 ## [1.0.2](https://github.com/baiwusanyu-c/unplugin-img-compress/compare/v1.0.1...v1.0.2) (2023-01-10)
 
 
