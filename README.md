@@ -15,6 +15,7 @@ Image compression plugin based on tinypng
 * 🌈 Compatible with multiple bundled platforms（vite、rollup、esbuild、webpack）
 * 🌌 Support for compressing pictures in the product when packaging
 * 🌊 Support image compression during development
+* ⛰ Support png|jpg|jpeg|webp
 
 ## Install
 

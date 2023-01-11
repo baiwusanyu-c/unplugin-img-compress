@@ -34,4 +34,4 @@ export function jsonClone<T>(val: T): T {
   return JSON.parse(JSON.stringify(val))
 }
 
-export const isSupportImg = (key: string) => /\.(png|jpg|gif|jpeg|svg)$/i.test(key)
+export const isSupportImg = (key: string) => /\.(png|jpg|jpeg|webp)$/i.test(key)
