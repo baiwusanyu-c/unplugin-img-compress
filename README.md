@@ -142,15 +142,13 @@ Specifies whether the plug-in is run in the form of `cli` or a plug-in of a pack
 When it is set to `dev`, it will no longer run when the packaging tool is packaged (such as vite).  
 If you want to compress the image when packaging, please set it to `build`,  
 If you want to run independently in the form of `cli` to compress images during development,   
-please set it to `dev`  
-([More information](https://github.com/baiwusanyu-c/unplugin-img-compress/blob/master/README-CN.md#CliMode))
+please set it to `dev` 
 
 ### mode
 Specifies whether to enable file monitoring. When `mode` is `once`,   
 `unplugin-img-compress` will stop after executing once.  
 When `mode` is `watch`, `unplugin-img-compress` will monitor the changes of the images in the target image folder,  
-and automatically compress the newly added images.  
-([More information](https://github.com/baiwusanyu-c/unplugin-img-compress/blob/master/README-CN.md#CliMode))
+and automatically compress the newly added images. 
 
 ## Cli Mode
 `unplugin-img-compress` also provides a way to run scripts（inspired by [easy-tinypng-cli](https://github.com/sudongyuer/easy-tinypng-cli)）
