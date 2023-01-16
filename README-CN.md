@@ -141,12 +141,10 @@ export interface CompressOption{
 指定插件是以 `cli` 的形式运行还是打包工具的插件运行，当他设置为`dev`时，在打包工具打包时（比如vite），它将不再运行
 如果你想在打包时对图片进行压缩，这里请设置为 `build`, 
 如果你想在开发期间以`cli`的形式独立运行来压缩图片，请设置为`dev`
-([更多信息](https://github.com/baiwusanyu-c/unplugin-img-compress/blob/master/README-CN.md#CliMode))
 
 ### mode
 指定是否开启文件监听，当 `mode` 为 `once`时，`unplugin-img-compress`执行一次则会停止，
 当 `mode` 为 `watch`时，`unplugin-img-compress`会监听目标图片文件夹内图片的变化，对新增的图片进行自动压缩。
-([更多信息](https://github.com/baiwusanyu-c/unplugin-img-compress/blob/master/README-CN.md#CliMode))
 
 ## Cli Mode(脚本模式)
 `unplugin-img-compress`还提供了一种脚本的运行方式（灵感来自于[easy-tinypng-cli](https://github.com/sudongyuer/easy-tinypng-cli)）
