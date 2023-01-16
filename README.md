@@ -22,11 +22,11 @@ Image compression plugin based on tinypng
 ```bash
 npm i unplugin-img-compress -D
 ```
-或
+Or
 ```bash
 yarn add unplugin-img-compress -D
 ```
-或
+Or
 ```bash
 pnpm add unplugin-img-compress -D
 ```
