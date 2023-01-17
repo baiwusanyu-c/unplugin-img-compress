@@ -2,7 +2,7 @@
   "name": "unplugin-img-compress",
   "description": "Image compression plugin based on tinypng",
   "private": false,
-  "version": "1.0.6",
+  "version": "1.0.7",
   "packageManager": "pnpm@6.32.4",
   "keywords": [
     "webpack",
