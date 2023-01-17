@@ -19,6 +19,7 @@ const movePkgToRootDist = async() => {
   content.scripts = {
     publish: 'pnpm publish --no-git-checks --access public',
   }
+  content.type = 'module'
   await fs.writeJson(`${distRoot}/package.json`, content, { spaces: 2 })
 }
 
