@@ -1,3 +1,12 @@
+## [1.0.6](https://github.com/baiwusanyu-c/unplugin-img-compress/compare/v1.0.5...v1.0.6) (2023-01-17)
+
+
+### Bug Fixes
+
+* fix package json type error ([#8](https://github.com/baiwusanyu-c/unplugin-img-compress/issues/8)) ([2d2f58f](https://github.com/baiwusanyu-c/unplugin-img-compress/commit/2d2f58f65e1e9a1a75738e7feb3566684b8d526d))
+
+
+
 ## [1.0.5](https://github.com/baiwusanyu-c/unplugin-img-compress/compare/v1.0.4...v1.0.5) (2023-01-11)
 
 
