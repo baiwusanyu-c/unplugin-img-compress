@@ -1,3 +1,7 @@
+## [1.0.7](https://github.com/baiwusanyu-c/unplugin-img-compress/compare/v1.0.6...v1.0.7) (2023-01-17)
+
+
+
 ## [1.0.6](https://github.com/baiwusanyu-c/unplugin-img-compress/compare/v1.0.5...v1.0.6) (2023-01-17)
 
 
