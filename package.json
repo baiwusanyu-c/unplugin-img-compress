@@ -41,7 +41,7 @@
   },
   "scripts": {
     "init": "pnpm i",
-    "lint:fix": "eslint . --fix",
+    "lint:fix": "eslint --fix ./ --ext .vue,.js,.ts,.jsx,.tsx,.json ",
     "dev": "pnpm run clean && pnpm run --filter @unplugin-img-compress/build dev",
     "play:runtime-build": "pnpm run --filter @unplugin-img-compress/play runtime:build",
     "play:runtime-dev": "pnpm run --filter @unplugin-img-compress/play runtime:dev",
@@ -75,7 +75,7 @@
     "unplugin": "^0.9.6"
   },
   "devDependencies": {
-    "@baiwusanyu/eslint-config": "^1.0.9",
+    "@baiwusanyu/eslint-config": "^1.0.10",
     "@changesets/cli": "^2.23.1",
     "@commitlint/cli": "^16.2.1",
     "@commitlint/config-conventional": "^16.2.1",
@@ -91,7 +91,7 @@
     "bumpp": "^8.2.1",
     "conventional-changelog-cli": "^2.2.2",
     "cross-env": "^7.0.3",
-    "eslint": "8.18.0",
+    "eslint": "^8.32.0",
     "esno": "^0.16.3",
     "gulp": "^4.0.2",
     "husky": "^7.0.4",
