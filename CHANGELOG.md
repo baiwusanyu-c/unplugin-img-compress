@@ -1,3 +1,8 @@
+# [1.1.0](https://github.com/baiwusanyu-c/unplugin-img-compress/compare/v1.0.7...v1.1.0) (2023-02-22)
+
+### optimizate
+Optimize the compression speed in build mode([1c088a29](https://github.com/baiwusanyu-c/unplugin-img-compress/commit/1c088a2994e8cd38aed129bb1179188a4716eea9))
+
 ## [1.0.7](https://github.com/baiwusanyu-c/unplugin-img-compress/compare/v1.0.6...v1.0.7) (2023-01-17)
 
 
