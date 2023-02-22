@@ -22,23 +22,32 @@ export const compressImgBundle = async(
   bundle: IBundle,
   tinify = tinifyBuffer,
 ) => {
+  const taskList = []
   for (const key in bundle) {
     // 匹配是否为图片
     if (isSupportImg(key)) {
-      const fileName = bundle[key].fileName
-      const bufferSource = bundle[key].source as Uint8Array
-      // 压缩
-      const tinifyBufferRes = (await tinify(bufferSource, APIKey)) as Uint8Array
-      // 写入
-      await outputFile(outputDir ? `${outputDir}/${fileName}` : key, tinifyBufferRes)
-
-      console.log(
-        chalk.greenBright.bold('✔ : compression complete'),
-        chalk.blueBright.bold(`[${fileName}]`))
-      console.log(
-        chalk.yellowBright.bold(`✅ : [${formatSizeUnits(bufferSource.byteLength)}]`),
-        '->',
-        chalk.greenBright.bold(`[${formatSizeUnits(tinifyBufferRes.byteLength)}]`))
+      const goCompress = async() => {
+        const fileName = bundle[key].fileName
+        const bufferSource = bundle[key].source as Uint8Array
+        console.log(
+          chalk.greenBright.bold('✨ : start compression'),
+          chalk.blueBright.bold(`[${fileName}]`))
+        // 压缩
+        const tinifyBufferRes = (await tinify(bufferSource, APIKey)) as Uint8Array
+        // 写入
+        await outputFile(outputDir ? `${outputDir}/${fileName}` : key, tinifyBufferRes)
+        console.log(
+          '✅ : ',
+          chalk.blueBright.bold(`[${fileName}]`),
+          chalk.yellowBright.bold(`[${formatSizeUnits(bufferSource.byteLength)}]`),
+          '->',
+          chalk.greenBright.bold(`[${formatSizeUnits(tinifyBufferRes.byteLength)}]`))
+      }
+      const task = new Promise((resolve) => {
+        resolve(goCompress())
+      })
+      taskList.push(task)
     }
   }
+  await Promise.all(taskList)
 }

@@ -22,7 +22,7 @@ const unplugin = createUnplugin(
         log('info', '✨ : unplugin-img-compress running...[runtime dev]')
         if (optionInner.runtime === 'build' && optionInner.compressImgBundle) {
           const outputDir = outputOptions.dir!.replaceAll('\\', '/')
-          await optionInner.compressImgBundle(outputDir, optionInner.APIKey, bundle)
+          optionInner.compressImgBundle(outputDir, optionInner.APIKey, bundle)
         }
       },
     }
