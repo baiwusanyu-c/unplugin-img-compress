@@ -25,7 +25,7 @@ const movePkgToRootDist = async() => {
 
 const moveReadMeToRootDist = async() => {
   await fs.copy(`${path.resolve('../README.md')}`, `${distRoot}/README.md`)
-  await fs.copy(`${path.resolve('../README-CN.md')}`, `${distRoot}/README-CN.md`)
+  await fs.copy(`${path.resolve('../README.ZH-CN.md')}`, `${distRoot}/README.ZH-CN.md`)
 }
 
 export default series(

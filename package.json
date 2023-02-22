@@ -50,7 +50,7 @@
     "publish": "pnpm publish --no-git-checks --access public",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "clean": "rimraf dist",
-    "prepare": "husky install",
+    "prepare": "npx simple-git-hooks",
     "husky:step1": "npx husky add .husky/pre-commit \"npm exec lint-staged --allow-empty\"",
     "husky:step2": "git add .husky/pre-commit && npx husky add .husky/commit-msg \"npx --no -- commitlint --edit $1\" && git add .husky/commit-msg",
     "test": "vitest",
@@ -76,8 +76,6 @@
   },
   "devDependencies": {
     "@baiwusanyu/eslint-config": "^1.0.10",
-    "@changesets/cli": "^2.23.1",
-    "@commitlint/cli": "^16.2.1",
     "@commitlint/config-conventional": "^16.2.1",
     "@rollup/plugin-node-resolve": "^14.1.0",
     "@types/gulp": "^4.0.10",
@@ -94,7 +92,6 @@
     "eslint": "^8.32.0",
     "esno": "^0.16.3",
     "gulp": "^4.0.2",
-    "husky": "^7.0.4",
     "jsdom": "^20.0.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.79.0",
@@ -103,12 +100,17 @@
     "tsup": "^6.5.0",
     "typescript": "^4.9.3",
     "vite": "^4.0.4",
-    "vitest": "0.22.1"
+    "vitest": "0.22.1",
+    "lint-staged": "^13.1.1",
+    "simple-git-hooks": "^2.8.1"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged",
+    "commit-msg": "esno vertify-commit.ts"
   },
   "lint-staged": {
     "*.{vue,js,ts,jsx,tsx,md,json}": [
-      "eslint ./ --fix",
-      "git add"
+      "eslint ./ --fix"
     ]
   },
   "eslintConfig": {

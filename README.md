@@ -1,4 +1,4 @@
-English | [中文](https://github.com/baiwusanyu-c/unplugin-img-compress/blob/master/README-CN.md)
+English | [中文](https://github.com/baiwusanyu-c/unplugin-img-compress/blob/master/README.ZH-CN.md)
 
 # unplugin-img-compress
 Image compression plugin based on tinypng
