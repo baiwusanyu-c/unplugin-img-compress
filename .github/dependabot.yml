@@ -17,7 +17,5 @@ updates:
     stability: stable
     security-updates: true
     ignore:
-      - dependency-name: chalk
-        reason: "忽略chalk包的更新"
-      - dependency-name: eslint
-        reason: "忽略eslint包的更新"
+      - dependency-name: "chalk"
+      - dependency-name: "eslint"
