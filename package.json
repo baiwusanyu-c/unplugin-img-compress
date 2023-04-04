@@ -80,7 +80,7 @@
     "@unplugin-img-compress/play": "workspace:*",
     "@unplugin-img-compress/utils": "workspace:*",
     "@vitest/coverage-c8": "^0.22.1",
-    "@vitest/ui": "0.22.1",
+    "@vitest/ui": "0.29.8",
     "bumpp": "^8.2.1",
     "cross-env": "^7.0.3",
     "eslint": "^8.32.0",
