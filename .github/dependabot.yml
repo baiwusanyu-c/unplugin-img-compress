@@ -18,5 +18,5 @@ updates:
         # 仅更新安全漏洞的包
         security-updates: true
     ignore:
-      - dependency-name: chalk
-      - dependency-name: eslint
+      - chalk
+      - eslint
