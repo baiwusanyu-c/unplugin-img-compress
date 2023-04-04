@@ -1,7 +1,8 @@
 {
   "name": "unplugin-img-compress",
-  "description": "Image compression plugin based on tinypng",
+  "description": "🔥 Image compression plugin based on tinypng",
   "private": false,
+  "type": "module",
   "version": "1.1.0",
   "packageManager": "pnpm@6.32.4",
   "keywords": [
@@ -97,7 +98,7 @@
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged",
-    "commit-msg": "node vertify-commit.ts"
+    "commit-msg": "node vertify-commit.js"
   },
   "lint-staged": {
     "*.{vue,js,ts,jsx,tsx,md,json}": [
