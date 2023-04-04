@@ -19,4 +19,4 @@ updates:
         security-updates: true
     ignore:
       - dependency-name: chalk
-      - dependency-name: chalk
+      - dependency-name: eslint
