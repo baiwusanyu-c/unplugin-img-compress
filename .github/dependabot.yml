@@ -12,10 +12,9 @@ updates:
     # 并且仅更新来自稳定发布的包（安全更新）
     allow:
       - dependency-type: all
+    # 允许的更新类型、版本稳定性、安全更新需要在version: 2的上层
     update-types: [minor, patch]
-    # 对稳定版本做出反应，排除不稳定的“beta”版本
     stability: stable
-    # 仅更新安全漏洞的包
     security-updates: true
     ignore:
       - dependency-name: chalk
