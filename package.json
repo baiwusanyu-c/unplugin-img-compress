@@ -99,7 +99,7 @@
     "gulp": "^4.0.2",
     "jsdom": "^21.1.1",
     "lint-staged": "^13.1.1",
-    "rimraf": "^3.0.2",
+    "rimraf": "^4.4.1",
     "rollup": "^2.79.0",
     "simple-git-hooks": "^2.8.1",
     "tsup": "^6.5.0",
