@@ -90,7 +90,7 @@
     "@unplugin-img-compress/entry": "workspace:*",
     "@unplugin-img-compress/play": "workspace:*",
     "@unplugin-img-compress/utils": "workspace:*",
-    "@vitest/coverage-c8": "^0.29.8",
+    "@vitest/coverage-c8": "^0.30.1",
     "@vitest/ui": "0.30.1",
     "bumpp": "^9.1.0",
     "cross-env": "^7.0.3",
