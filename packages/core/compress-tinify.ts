@@ -1,7 +1,7 @@
 import tinify from 'tinify'
 import { outputFile } from 'fs-extra'
-import chalk from 'chalk'
-import { formatSizeUnits, isSupportImg } from '@unplugin-img-compress/utils'
+import { isSupportImg } from '@unplugin-img-compress/utils'
+import { log, normalizeSizeUnits } from 'baiwusanyu-utils'
 import type { IBundle } from './types'
 
 export const tinifyBuffer = (data: Uint8Array, APIKey: string) => {
@@ -29,19 +29,14 @@ export const compressImgBundle = async(
       const goCompress = async() => {
         const fileName = bundle[key].fileName
         const bufferSource = bundle[key].source as Uint8Array
-        console.log(
-          chalk.greenBright.bold('✨ : start compression'),
-          chalk.blueBright.bold(`[${fileName}]`))
+        log('info', `✨  start compression 【${fileName}】`)
         // 压缩
         const tinifyBufferRes = (await tinify(bufferSource, APIKey)) as Uint8Array
         // 写入
         await outputFile(outputDir ? `${outputDir}/${fileName}` : key, tinifyBufferRes)
-        console.log(
-          '✅ : ',
-          chalk.blueBright.bold(`[${fileName}]`),
-          chalk.yellowBright.bold(`[${formatSizeUnits(bufferSource.byteLength)}]`),
-          '->',
-          chalk.greenBright.bold(`[${formatSizeUnits(tinifyBufferRes.byteLength)}]`))
+        log('info', `【${fileName}】`)
+        log('warning', `✅  before - ${normalizeSizeUnits(bufferSource.byteLength)}`)
+        log('success', `✅  after - ${normalizeSizeUnits(tinifyBufferRes.byteLength)}`)
       }
       const task = new Promise((resolve) => {
         resolve(goCompress())

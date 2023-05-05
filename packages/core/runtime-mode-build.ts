@@ -1,4 +1,4 @@
-import { log } from '@unplugin-img-compress/utils'
+import { log, setGlobalPrefix } from 'baiwusanyu-utils'
 import { createUnplugin } from 'unplugin'
 import { initOption } from './option'
 import type { CompressOption, IBundle, writeBundle } from './types'
@@ -7,7 +7,8 @@ import type { PluginOption } from 'vite'
 import type { OutputOptions } from 'rollup'
 
 const unplugin = createUnplugin(
-  (option: CompressOption): UnpluginOptions & { writeBundle?: writeBundle } => {
+  (option: CompressOption) => {
+    setGlobalPrefix('[unplugin-img-compress]:')
     const optionInner = initOption(option)
     if (!optionInner) {
       return {
@@ -16,16 +17,18 @@ const unplugin = createUnplugin(
     }
     return {
       name: 'unplugin-img-compress',
-      async writeBundle(
+      writeBundle: async(
         outputOptions: OutputOptions,
-        bundle: IBundle) {
-        log('info', '✨ : unplugin-img-compress running...[runtime dev]')
+        bundle: IBundle,
+      ) => {
+        log('info', '✨ running...')
+        log('info', '✨ 【runtime dev】')
         if (optionInner.runtime === 'build' && optionInner.compressImgBundle) {
           const outputDir = outputOptions.dir!.replaceAll('\\', '/')
           optionInner.compressImgBundle(outputDir, optionInner.APIKey, bundle)
         }
       },
-    }
+    } as UnpluginOptions & { writeBundle?: writeBundle }
   })
 
 export const viteImgCompress: (option: CompressOption) => PluginOption = unplugin.vite

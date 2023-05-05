@@ -1,5 +1,5 @@
 import { resolve } from 'path'
-import { extend, log } from '@unplugin-img-compress/utils'
+import { extend, log } from 'baiwusanyu-utils'
 import { compressImgBundle } from './compress-tinify'
 import type { CompressOption } from './types'
 export const defaultOption: CompressOption = {

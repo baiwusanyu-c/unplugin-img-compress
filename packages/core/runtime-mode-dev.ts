@@ -1,8 +1,9 @@
 import * as path from 'path'
 import { cwd } from 'node:process'
-import { isSupportImg, log } from '@unplugin-img-compress/utils'
+import { isSupportImg } from '@unplugin-img-compress/utils'
 import fs, { pathExists, remove } from 'fs-extra'
 import chokidar from 'chokidar'
+import { log, setGlobalPrefix } from 'baiwusanyu-utils'
 import { initOption } from './option'
 import type { AssetInfo, CompressOption, IBundle } from './types'
 
@@ -90,6 +91,7 @@ export const patchFiles = async(fl1: Record<string, string>, fl2: Record<string,
 }
 
 export async function compressImg(option: CompressOption) {
+  setGlobalPrefix('[unplugin-img-compress]:')
   const optionInner = initOption(option)
 
   if (!optionInner) {
@@ -101,11 +103,11 @@ export async function compressImg(option: CompressOption) {
     return
   }
 
-  log('info', '✨ : unplugin-img-compress running...[runtime dev]')
-
+  log('info', '✨ running...')
+  log('info', '✨ 【runtime dev】')
   const rootFile = path.resolve(IMG_TINIFY_RECORD)
   const targetDir = optionInner.dir
-  let bundle = {}
+  let bundle = {} as IBundle
   let fileList: Record<string, string> = {}
   for (let i = 0; i < targetDir.length; i++)
     await getImgFilePath(targetDir[i], fileList)

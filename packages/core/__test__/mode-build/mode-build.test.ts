@@ -1,7 +1,7 @@
 import { cwd } from 'node:process'
 import { describe, expect, it, vi } from 'vitest'
 import { pathExists, readFile, remove } from 'fs-extra'
-import { jsonClone } from '@unplugin-img-compress/utils'
+import { jsonClone } from 'baiwusanyu-utils'
 import { viteImgCompress } from '../../index'
 import { compressImgBundle } from '../../compress-tinify'
 import type { PluginOption } from 'vite'

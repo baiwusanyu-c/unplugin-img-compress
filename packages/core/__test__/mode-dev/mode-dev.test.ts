@@ -1,7 +1,7 @@
 import { cwd } from 'node:process'
 import path from 'path'
 import { describe, expect, it, vi } from 'vitest'
-import { jsonClone } from '@unplugin-img-compress/utils'
+import { jsonClone } from 'baiwusanyu-utils'
 import fs, { outputFile, pathExists, readFile, remove } from 'fs-extra'
 import { clearRecord, devCompressImg } from '../../index'
 import { getImgFileBundle, patchFiles, updateRecord } from '../../runtime-mode-dev'
