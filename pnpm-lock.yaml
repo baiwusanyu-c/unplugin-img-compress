@@ -71,7 +71,7 @@ importers:
 
   build:
     specifiers:
-      '@types/fs-extra': ^9.0.13
+      '@types/fs-extra': ^11.0.1
       '@types/node': ^18.0.0
       '@unplugin-img-compress/core': workspace:*
       '@unplugin-img-compress/utils': workspace:*
@@ -83,7 +83,7 @@ importers:
       '@unplugin-img-compress/core': link:../packages/core
       '@unplugin-img-compress/utils': link:../utils
     devDependencies:
-      '@types/fs-extra': 9.0.13
+      '@types/fs-extra': 11.0.1
       '@types/node': 18.7.15
       cross-env: 7.0.3
       rimraf: 3.0.2
@@ -102,10 +102,10 @@ importers:
 
   packages/core:
     specifiers:
-      '@types/fs-extra': ^9.0.13
+      '@types/fs-extra': ^11.0.1
       '@types/node': ^18.0.0
     devDependencies:
-      '@types/fs-extra': 9.0.13
+      '@types/fs-extra': 11.0.1
       '@types/node': 18.7.15
 
   packages/entry:
@@ -785,9 +785,10 @@ packages:
     resolution: {integrity: sha512-Q5Vn3yjTDyCMV50TB6VRIbQNxSE4OmZR86VSbGaNpfUolm0iePBB4KdEEHmxoY5sT2+2DIvXW0rvMDP2nHZ4Mg==}
     dev: true
 
-  /@types/fs-extra/9.0.13:
-    resolution: {integrity: sha512-nEnwB++1u5lVDM2UI4c1+5R+FYaKfaAzS4OococimjVm3nQw3TuzH5UNsocrcTBbhnerblyHj4A49qXbIiZdpA==}
+  /@types/fs-extra/11.0.1:
+    resolution: {integrity: sha512-MxObHvNl4A69ofaTRU8DFqvgzzv8s9yRtaPPm5gud9HDNvpB3GPQFvNuTWAI59B9huVGV5jXYJwbCsmBsOGYWA==}
     dependencies:
+      '@types/jsonfile': 6.1.1
       '@types/node': 18.7.15
     dev: true
 
@@ -823,6 +824,12 @@ packages:
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
+    dev: true
+
+  /@types/jsonfile/6.1.1:
+    resolution: {integrity: sha512-GSgiRCVeapDN+3pqA35IkQwasaCh/0YFH5dEF6S88iDvEn901DjOeH3/QPY+XYP1DFzDZPvIvfeEgk+7br5png==}
+    dependencies:
+      '@types/node': 18.7.15
     dev: true
 
   /@types/mdast/3.0.10:
