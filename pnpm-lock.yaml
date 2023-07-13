@@ -252,8 +252,8 @@ packages:
     resolution: {integrity: sha512-lb3sc9wrAsZuZPEYJd06QY0A36thVWf+tTjJ2yk5RyIr3X2KYBHFVfCdbJMC8psSNmqgfICZkJ4s99M6IHWRfQ==}
     dev: false
 
-  /@baiwusanyu/utils-task/1.0.8:
-    resolution: {integrity: sha512-Zg/hnjVXVMSYRwQ8St2peKOWfDex6Kvdi1oxt6IwfECMhVPtZ78RCspttt04mZi7GKKMHVnZEoXU2qdUURxb7A==}
+  /@baiwusanyu/utils-task/1.0.13:
+    resolution: {integrity: sha512-Y+1I5UddnqWYeNyjuNNf0xRwOHio8dvR/K8Ewf50lkcAyHLhFW/CcEgR9c97lFY8rAuUSGrObXU4A/LkGBS1zQ==}
     dev: false
 
   /@bcoe/v8-coverage/0.2.3:
@@ -1679,7 +1679,7 @@ packages:
       '@baiwusanyu/utils-log': 1.0.8_ansi-colors@4.1.3
       '@baiwusanyu/utils-normalize': 1.0.8
       '@baiwusanyu/utils-obj': 1.0.8
-      '@baiwusanyu/utils-task': 1.0.8
+      '@baiwusanyu/utils-task': 1.0.13
     transitivePeerDependencies:
       - ansi-colors
     dev: false
