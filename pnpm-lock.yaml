@@ -224,7 +224,7 @@ packages:
       eslint-plugin-react-hooks: 4.6.0_eslint@8.32.0
       eslint-plugin-unicorn: 45.0.2_eslint@8.32.0
       eslint-plugin-vue: 9.9.0_eslint@8.32.0
-      eslint-plugin-yml: 1.4.0_eslint@8.32.0
+      eslint-plugin-yml: 1.8.0_eslint@8.32.0
       jsonc-eslint-parser: 2.1.0
       yaml-eslint-parser: 1.2.2
     transitivePeerDependencies:
@@ -3213,8 +3213,8 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-yml/1.4.0_eslint@8.32.0:
-    resolution: {integrity: sha512-vzggXNfPKa+arIaNUGoC3DPRZCxNty+xD/v9xOcE5D3Bj9SbgIrEobqVB35I8QxHd2YjL/dOS0xIIFmjAalwbw==}
+  /eslint-plugin-yml/1.8.0_eslint@8.32.0:
+    resolution: {integrity: sha512-fgBiJvXD0P2IN7SARDJ2J7mx8t0bLdG6Zcig4ufOqW5hOvSiFxeUyc2g5I1uIm8AExbo26NNYCcTGZT0MXTsyg==}
     engines: {node: ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: '>=6.0.0'
