@@ -2515,7 +2515,7 @@ packages:
     resolution: {integrity: sha512-QHTXI/sZQmko1cbDoNAa3mJ5qhWUUNAq3vR0/YiD379fWQrcfuoX1+HW2S0MTt7XmoPLapdaDKUtelUSPic7hQ==}
     engines: {node: '>=10.13.0'}
     dependencies:
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.11
       tapable: 2.2.1
     dev: true
 
@@ -3677,7 +3677,7 @@ packages:
     resolution: {integrity: sha512-MGIE4HOvQCeUCzmlHs0vXpih4ysz4wg9qiSAu6cd42lVwPbTM1TjV7RusoyQqMmk/95gdQZX72u+YW+c3eEpFQ==}
     engines: {node: '>=14.14'}
     dependencies:
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.11
       jsonfile: 6.1.0
       universalify: 2.0.0
     dev: false
@@ -3693,7 +3693,7 @@ packages:
     resolution: {integrity: sha512-+vSd9frUnapVC2RZYfL3FCB2p3g4TBhaUmrsWlSudsGdnxIuUvBB2QM1VZeBtc49QFwrp+wQLrDs3+xxDgI5gQ==}
     engines: {node: '>= 0.10'}
     dependencies:
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.11
       through2: 2.0.5
     dev: true
 
@@ -3970,8 +3970,8 @@ packages:
       get-intrinsic: 1.1.3
     dev: true
 
-  /graceful-fs/4.2.10:
-    resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==}
+  /graceful-fs/4.2.11:
+    resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
 
   /grapheme-splitter/1.0.4:
     resolution: {integrity: sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==}
@@ -4781,7 +4781,7 @@ packages:
     dependencies:
       universalify: 2.0.0
     optionalDependencies:
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.11
     dev: false
 
   /jsx-ast-utils/3.3.3:
@@ -4941,7 +4941,7 @@ packages:
     resolution: {integrity: sha512-cy7ZdNRXdablkXYNI049pthVeXFurRyb9+hA/dZzerZ0pGTx42z+y+ssxBaVV2l70t1muq5IdKhn4UtcoGUY9A==}
     engines: {node: '>=0.10.0'}
     dependencies:
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.11
       parse-json: 2.2.0
       pify: 2.3.0
       pinkie-promise: 2.0.1
@@ -5723,7 +5723,7 @@ packages:
     resolution: {integrity: sha512-S4eENJz1pkiQn9Znv33Q+deTOKmbl+jj1Fl+qiP/vYezj+S8x+J3Uo0ISrx/QoEvIlOaDWJhPaRd1flJ9HXZqg==}
     engines: {node: '>=0.10.0'}
     dependencies:
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.11
       pify: 2.3.0
       pinkie-promise: 2.0.1
     dev: true
@@ -6020,7 +6020,7 @@ packages:
     resolution: {integrity: sha512-1JU/8q+VgFZyxwrJ+SVIOsh+KywWGpds3NTqikiKpDMZWScmAYyKIgqkO+ARvNWJfXeXR1zxz7aHF4u4CyH6vQ==}
     engines: {node: '>=0.10'}
     dependencies:
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.11
       micromatch: 3.1.10
       readable-stream: 2.3.8
     dev: true
@@ -7253,7 +7253,7 @@ packages:
     dependencies:
       fs-mkdirp-stream: 1.0.0
       glob-stream: 6.1.0
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.11
       is-valid-glob: 1.0.0
       lazystream: 1.0.1
       lead: 1.0.0
@@ -7276,7 +7276,7 @@ packages:
     dependencies:
       append-buffer: 1.0.2
       convert-source-map: 1.9.0
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.11
       normalize-path: 2.1.1
       now-and-later: 2.0.1
       remove-bom-buffer: 3.0.0
