@@ -210,7 +210,7 @@ packages:
       '@typescript-eslint/eslint-plugin': 5.48.2_1545c5bc6b40b783a8c4ed9dc3eca255
       '@typescript-eslint/parser': 5.48.2_eslint@8.32.0+typescript@5.1.6
       eslint: 8.32.0
-      eslint-config-standard: 17.0.0_bab740091ee8835c19921a022192f8e6
+      eslint-config-standard: 17.1.0_bab740091ee8835c19921a022192f8e6
       eslint-import-resolver-typescript: 3.5.5_7cbe72f17a1d434bd674932253b33208
       eslint-plugin-eslint-comments: 3.2.0_eslint@8.32.0
       eslint-plugin-html: 7.1.0
@@ -2955,12 +2955,13 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /eslint-config-standard/17.0.0_bab740091ee8835c19921a022192f8e6:
-    resolution: {integrity: sha512-/2ks1GKyqSOkH7JFvXJicu0iMpoojkwB+f5Du/1SC0PtBL+s8v30k9njRZ21pm2drKYm2342jFnGWzttxPmZVg==}
+  /eslint-config-standard/17.1.0_bab740091ee8835c19921a022192f8e6:
+    resolution: {integrity: sha512-IwHwmaBNtDK4zDHQukFDW5u/aTb8+meQWZvNFWkiGmbWjD6bqyuSSBxxXKkCftCUzc1zwCH2m/baCNDLGmuO5Q==}
+    engines: {node: '>=12.0.0'}
     peerDependencies:
       eslint: ^8.0.1
       eslint-plugin-import: ^2.25.2
-      eslint-plugin-n: ^15.0.0
+      eslint-plugin-n: '^15.0.0 || ^16.0.0 '
       eslint-plugin-promise: ^6.0.0
     dependencies:
       eslint: 8.32.0
