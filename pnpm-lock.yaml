@@ -225,7 +225,7 @@ packages:
       eslint-plugin-unicorn: 45.0.2_eslint@8.32.0
       eslint-plugin-vue: 9.9.0_eslint@8.32.0
       eslint-plugin-yml: 1.8.0_eslint@8.32.0
-      jsonc-eslint-parser: 2.1.0
+      jsonc-eslint-parser: 2.3.0
       yaml-eslint-parser: 1.2.2
     transitivePeerDependencies:
       - supports-color
@@ -3048,7 +3048,7 @@ packages:
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0_eslint@8.32.0
       eslint: 8.32.0
-      jsonc-eslint-parser: 2.1.0
+      jsonc-eslint-parser: 2.3.0
       natural-compare: 1.4.0
     dev: true
 
@@ -4730,8 +4730,8 @@ packages:
       minimist: 1.2.6
     dev: true
 
-  /jsonc-eslint-parser/2.1.0:
-    resolution: {integrity: sha512-qCRJWlbP2v6HbmKW7R3lFbeiVWHo+oMJ0j+MizwvauqnCV/EvtAeEeuCgoc/ErtsuoKgYB8U4Ih8AxJbXoE6/g==}
+  /jsonc-eslint-parser/2.3.0:
+    resolution: {integrity: sha512-9xZPKVYp9DxnM3sd1yAsh/d59iIaswDkai8oTxbursfKYbg/ibjX0IzFt35+VZ8iEW453TVTXztnRvYUQlAfUQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dependencies:
       acorn: 8.9.0
