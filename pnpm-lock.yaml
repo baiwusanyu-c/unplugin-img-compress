@@ -264,7 +264,7 @@ packages:
     resolution: {integrity: sha512-BDXFbYOJzT/NBEtp71cvsrGPwGAMGRB/349rwKuoxNSiKjPraNNnlK6MIIabViCjqZugu6j+xeMDlEkWdHHJSg==}
     dependencies:
       '@esbuild-kit/core-utils': 3.1.0
-      get-tsconfig: 4.6.0
+      get-tsconfig: 4.6.2
     dev: true
 
   /@esbuild-kit/core-utils/2.3.0:
@@ -285,7 +285,7 @@ packages:
     resolution: {integrity: sha512-N9dPKAj8WOx6djVnStgILWXip4fjDcBk9L7azO0/uQDpu8Ee0eaL78mkN4Acid9BzvNAKWwdYXFJZnsVahNEew==}
     dependencies:
       '@esbuild-kit/core-utils': 2.3.0
-      get-tsconfig: 4.6.0
+      get-tsconfig: 4.6.2
     dev: true
 
   /@esbuild/android-arm/0.15.18:
@@ -2966,7 +2966,7 @@ packages:
       eslint: 8.32.0
       eslint-module-utils: 2.8.0_eslint@8.32.0
       eslint-plugin-import: 2.27.5_eslint@8.32.0
-      get-tsconfig: 4.6.0
+      get-tsconfig: 4.6.2
       globby: 13.1.3
       is-core-module: 2.11.0
       is-glob: 4.0.3
@@ -3754,8 +3754,8 @@ packages:
       get-intrinsic: 1.1.3
     dev: true
 
-  /get-tsconfig/4.6.0:
-    resolution: {integrity: sha512-lgbo68hHTQnFddybKbbs/RDRJnJT5YyGy2kQzVwbq+g67X73i+5MVTval34QxGkOe9X5Ujf1UYpCaphLyltjEg==}
+  /get-tsconfig/4.6.2:
+    resolution: {integrity: sha512-E5XrT4CbbXcXWy+1jChlZmrmCwd5KGx502kDCXJJ7y898TtWW9FwoG5HfOLVRKmlmDGkWN2HM9Ho+/Y8F0sJDg==}
     dependencies:
       resolve-pkg-maps: 1.0.0
     dev: true
