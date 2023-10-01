@@ -103,7 +103,7 @@
     "rimraf": "^5.0.0",
     "rollup": "^3.20.2",
     "simple-git-hooks": "^2.8.1",
-    "tsup": "^6.5.0",
+    "tsup": "^7.2.0",
     "typescript": "^5.0.3",
     "vite": "^4.0.4",
     "vitest": "0.31.4"
