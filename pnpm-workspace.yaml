@@ -3,3 +3,4 @@ packages:
   - utils
   - build
   - play
+  - play-webpack
