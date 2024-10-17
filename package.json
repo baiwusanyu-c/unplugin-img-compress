@@ -27,7 +27,7 @@
     "play:runtime-dev": "pnpm run --filter @unplugin-img-compress/play runtime:dev",
     "build": "pnpm run clean && pnpm run --filter @unplugin-img-compress/build build",
     "release": "bumpp package.json --commit --push --tag",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist && rimraf packages/unplugin-img-compress/dist",
     "prepare": "npx simple-git-hooks",
     "test": "pnpm run --filter unplugin-img-compress test",
     "test:update": "pnpm run --filter unplugin-img-compress test test:update",

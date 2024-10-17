@@ -36,8 +36,7 @@ if (buildMode === 'dev') {
   for (const entryKey in entry) {
     const config = JSON.parse(JSON.stringify(baseConfig))
     config.entry = [entry[entryKey]]
-    config.outDir = entryKey === 'index'
-      ? path.resolve(process.cwd(), '../dist') : path.resolve(process.cwd(), `../dist/${entryKey}`)
+    config.outDir = path.resolve(process.cwd(), '../packages/unplugin-img-compress/dist')
     config.dts = true
     config.watch = true
     configOptions.push(config)
