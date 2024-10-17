@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-import { clearRecord, devCompressImg } from '@unplugin-img-compress/core'
 import { loadConfig } from 'unconfig'
-import type { CompressOption } from '@unplugin-img-compress/core/types'
+import { clearRecord, devCompressImg } from '../src/index'
+import type { CompressOption } from '../utils/types'
 
 const init = async() => {
   const clearIndex = process.argv.findIndex(arg =>

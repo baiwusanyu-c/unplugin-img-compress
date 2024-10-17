@@ -1,0 +1,78 @@
+{
+  "name": "unplugin-img-compress",
+  "description": "🔥 Image compression plugin based on tinypng",
+  "private": false,
+  "type": "module",
+  "version": "1.2.0",
+  "packageManager": "pnpm@9.7.1",
+  "keywords": [
+    "webpack",
+    "rollup",
+    "compression-library",
+    "vite",
+    "esbuild",
+    "unplugin",
+    "compression-img"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/baiwusanyu-c/unplugin-img-compress#README",
+  "author": "baiwusanyu-c",
+  "repository": "https://github.com/baiwusanyu-c/unplugin-img-compress",
+  "bugs": "https://github.com/baiwusanyu-c/unplugin-img-compress/issues",
+  "main": "./index.js",
+  "module": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "require": "./index.cjs",
+      "import": "./index.js"
+    }
+  },
+  "files": [
+
+  ],
+  "bin": {
+    "unp-img": "./bin/index.cjs"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./*",
+        "./index.d.ts"
+      ]
+    }
+  },
+  "scripts": {
+    "test": "vitest",
+    "test:update": "vitest -u",
+    "test:coverage": "vitest --coverage"
+  },
+  "peerDependencies": {
+    "baiwusanyu-utils": "^1.0.8",
+    "chokidar": "^3.5.3",
+    "fs-extra": "^11.1.1",
+    "ora": "^6.1.2",
+    "tinify": "^1.7.1",
+    "unconfig": "^0.3.5"
+  },
+  "dependencies": {
+    "baiwusanyu-utils": "^1.0.8",
+    "chokidar": "^3.5.3",
+    "fs-extra": "^11.1.1",
+    "ora": "^6.1.2",
+    "tinify": "^1.7.1",
+    "unconfig": "^0.3.5",
+    "unplugin": "^1.3.1"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.1",
+    "@vitest/coverage-c8": "^0.31.0",
+    "@vitest/ui": "0.34.3",
+    "jsdom": "^22.0.0",
+    "rollup": "^3.20.2",
+    "typescript": "^5.0.3",
+    "vite": "^4.0.4",
+    "vitest": "0.31.4"
+  }
+}

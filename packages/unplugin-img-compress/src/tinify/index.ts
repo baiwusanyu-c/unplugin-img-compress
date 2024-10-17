@@ -1,8 +1,8 @@
 import tinify from 'tinify'
 import { outputFile } from 'fs-extra'
-import { isSupportImg } from '@unplugin-img-compress/utils'
 import { log, normalizeSizeUnits } from 'baiwusanyu-utils'
-import type { IBundle } from './types'
+import { isSupportImg } from '../../utils'
+import type { IBundle } from '../../utils/types'
 
 export const tinifyBuffer = (data: Uint8Array, APIKey: string) => {
   tinify.key = APIKey

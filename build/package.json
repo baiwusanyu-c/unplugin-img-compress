@@ -9,19 +9,17 @@
   "scripts": {
     "dev": "cross-env BUILD_MODE=dev tsup-node --config index.ts",
     "build": "cross-env BUILD_MODE=prod tsup-node --config index.ts && pnpm run rewrite",
-    "rewrite": "gulp -require sucrase/register/ts -f gulp-file.ts",
-    "clean": "rimraf dist"
-  },
-  "dependencies": {
-    "@unplugin-img-compress/core": "workspace:*",
-    "@unplugin-img-compress/utils": "workspace:*"
+    "rewrite": "gulp -require sucrase/register/ts -f gulp-file.ts"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.1",
+    "@types/gulp": "^4.0.10",
     "@types/node": "^18.0.0",
     "cross-env": "^7.0.3",
+    "gulp": "^4.0.2",
     "rimraf": "^3.0.2",
     "sucrase": "^3.21.0",
-    "tsup": "^6.5.0"
+    "tsup": "^6.5.0",
+    "typescript": "^5.0.3"
   }
 }

@@ -16,10 +16,8 @@ const configOptions = []
 
 if (buildMode === 'prod') {
   entry = {
-    index: '../packages/entry/index.ts',
-    core: '../packages/core/index.ts',
-    bin: '../packages/bin/index.ts',
-    utils: '../utils/index.ts',
+    index: '../packages/unplugin-img-compress/src/index.ts',
+    bin: '../packages/unplugin-img-compress/bin/index.ts',
   }
   for (const entryKey in entry) {
     const config = JSON.parse(JSON.stringify(baseConfig))
@@ -33,7 +31,7 @@ if (buildMode === 'prod') {
 
 if (buildMode === 'dev') {
   entry = {
-    index: '../packages/entry/index.ts',
+    index: '../packages/unplugin-img-compress/src/index.ts',
   }
   for (const entryKey in entry) {
     const config = JSON.parse(JSON.stringify(baseConfig))
@@ -42,7 +40,6 @@ if (buildMode === 'dev') {
       ? path.resolve(process.cwd(), '../dist') : path.resolve(process.cwd(), `../dist/${entryKey}`)
     config.dts = true
     config.watch = true
-    config.noExternal = [/@unplugin-img-compress/]
     configOptions.push(config)
   }
 }

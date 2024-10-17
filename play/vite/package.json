@@ -1,5 +1,5 @@
 {
-  "name": "@unplugin-img-compress/play",
+  "name": "@unplugin-img-compress/play-vite",
   "private": true,
   "type": "module",
   "version": "1.0.0",

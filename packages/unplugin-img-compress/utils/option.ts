@@ -1,14 +1,7 @@
-import { resolve } from 'path'
 import { extend, log } from 'baiwusanyu-utils'
-import { compressImgBundle } from './compress-tinify'
+import { compressImgBundle } from '../src/tinify'
+import { defaultOption } from './index'
 import type { CompressOption } from './types'
-export const defaultOption: CompressOption = {
-  APIKey: '',
-  dir: [`${resolve()}asset`],
-  runtime: 'build',
-  mode: 'once',
-}
-
 export function initOption(option: CompressOption) {
   option = extend(defaultOption, option)
   if (typeof option.dir === 'string')

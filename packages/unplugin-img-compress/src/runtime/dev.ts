@@ -1,11 +1,11 @@
 import * as path from 'path'
 import { cwd } from 'node:process'
-import { isSupportImg } from '@unplugin-img-compress/utils'
 import fs, { pathExists, remove } from 'fs-extra'
 import chokidar from 'chokidar'
 import { log, setGlobalPrefix } from 'baiwusanyu-utils'
-import { initOption } from './option'
-import type { AssetInfo, CompressOption, IBundle } from './types'
+import { isSupportImg } from '../../utils'
+import { initOption } from '../../utils/option'
+import type { AssetInfo, CompressOption, IBundle } from '../../utils/types'
 
 const IMG_TINIFY_RECORD = 'IMG_TINIFY_RECORD.json'
 const getImgFilePath = async(

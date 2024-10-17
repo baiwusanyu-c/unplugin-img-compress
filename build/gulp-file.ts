@@ -1,14 +1,9 @@
 import * as path from 'path'
 import { series } from 'gulp'
-import fs, { copySync } from 'fs-extra'
-import pkg from '../package.json'
-import { run } from './utils'
-import { parallelTask } from './rewirte-path'
+import fs from 'fs-extra'
+import pkg from '../packages/unplugin-img-compress/package.json'
+
 const distRoot = path.resolve(process.cwd(), '../dist')
-const moveDistToRoot = async() => {
-  const distPathInBuild = path.resolve(process.cwd(), 'dist')
-  await copySync(distPathInBuild, distRoot)
-}
 
 const movePkgToRootDist = async() => {
   const content = JSON.parse(JSON.stringify(pkg))
@@ -24,17 +19,12 @@ const movePkgToRootDist = async() => {
 }
 
 const moveReadMeToRootDist = async() => {
+  const distRoot = path.resolve(process.cwd(), '../dist')
   await fs.copy(`${path.resolve('../README.md')}`, `${distRoot}/README.md`)
   await fs.copy(`${path.resolve('../README.ZH-CN.md')}`, `${distRoot}/README.ZH-CN.md`)
 }
 
 export default series(
-  ...parallelTask(),
-  // 移动dist
-  async() => {
-    const res = await moveDistToRoot()
-    return res
-  },
   // 移动 package.json 到 dist
   async() => {
     const res = await movePkgToRootDist()
@@ -43,11 +33,6 @@ export default series(
   // 移动 readme 到 dist
   async() => {
     const res = await moveReadMeToRootDist()
-    return res
-  },
-  // 删build目录下dist
-  async() => {
-    const res = await run('pnpm run --filter @unplugin-img-compress/build clean')
     return res
   },
 )

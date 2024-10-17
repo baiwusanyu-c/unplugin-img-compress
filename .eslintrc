@@ -1,6 +1,8 @@
 {
   "extends": "@baiwusanyu",
   "rules": {
-    "no-console": ["warn", { "allow": ["log"] }]
+    "no-console": ["warn", { "allow": ["log"] }],
+    "unicorn/number-literal-case": "off",
+    "unicorn/prefer-includes": "off"
   }
 }
