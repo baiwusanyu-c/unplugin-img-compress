@@ -4,8 +4,8 @@ import { describe, expect, it, vi } from 'vitest'
 import { jsonClone } from 'baiwusanyu-utils'
 import fs, { outputFile, pathExists, readFile, remove } from 'fs-extra'
 import { clearRecord, devCompressImg } from '../../index'
-import { getImgFileBundle, patchFiles, updateRecord } from '../../runtime-mode-dev'
-import type { CompressOption } from '../../types'
+import { getImgFileBundle, patchFiles, updateRecord } from '../../runtime/dev'
+import type { CompressOption } from '../../../utils/types'
 const recordPath = `${path.resolve()}/IMG_TINIFY_RECORD.json`
 const option = {
   APIKey: 'kZgn8pxfdjQjKFmf2StLq7CY4TqMgs0T',
@@ -37,7 +37,7 @@ describe('test mode dev', () => {
     expect(isExistRecord).not.toBeTruthy()
 
     const opt = jsonClone(option)
-    opt.dir = `${cwd()}/packages/core/__test__/mode-dev/`.replaceAll('\\', '/')
+    opt.dir = `${cwd()}/src/__test__/mode-dev/`.replaceAll('\\', '/')
     opt.compressImgBundle = async() => {}
 
     await devCompressImg(opt)
@@ -52,11 +52,11 @@ describe('test mode dev', () => {
     expect(isExistRecord).toBeTruthy()
 
     const opt = jsonClone(option)
-    opt.dir = `${cwd()}/packages/core/__test__/mode-dev/`.replaceAll('\\', '/')
+    opt.dir = `${cwd()}/src/__test__/mode-dev/`.replaceAll('\\', '/')
     opt.compressImgBundle = async() => {}
 
     // mock add
-    const testImgDir = `${cwd()}/packages/core/__test__/mode-dev/test.png`
+    const testImgDir = `${cwd()}/src/__test__/mode-dev/test.png`
     const bufferRes = await readFile(testImgDir)
     await outputFile(`${opt.dir}/test-res.png`, bufferRes)
 
@@ -72,11 +72,11 @@ describe('test mode dev', () => {
     expect(isExistRecord).toBeTruthy()
 
     const opt = jsonClone(option)
-    opt.dir = `${cwd()}/packages/core/__test__/mode-dev/`.replaceAll('\\', '/')
+    opt.dir = `${cwd()}/src/__test__/mode-dev/`.replaceAll('\\', '/')
     opt.compressImgBundle = async() => {}
 
     // mock delete
-    const testImgDir = `${cwd()}/packages/core/__test__/mode-dev/test-res.png`
+    const testImgDir = `${cwd()}/src/__test__/mode-dev/test-res.png`
     await remove(testImgDir)
 
     await devCompressImg(opt)
@@ -91,12 +91,12 @@ describe('test mode dev', () => {
     expect(isExistRecord).toBeTruthy()
 
     const opt = jsonClone(option)
-    opt.dir = `${cwd()}/packages/core/__test__/mode-dev/`.replaceAll('\\', '/')
+    opt.dir = `${cwd()}/src/__test__/mode-dev/`.replaceAll('\\', '/')
     opt.compressImgBundle = async() => {}
     opt.mode = 'watch'
 
     // mock add
-    const testImgDir = `${cwd()}/packages/core/__test__/mode-dev/test.png`
+    const testImgDir = `${cwd()}/src/__test__/mode-dev/test.png`
     const bufferRes = await readFile(testImgDir)
     await outputFile(`${opt.dir}/test-res.png`, bufferRes)
 
@@ -112,12 +112,12 @@ describe('test mode dev', () => {
     expect(isExistRecord).toBeTruthy()
 
     const opt = jsonClone(option)
-    opt.dir = `${cwd()}/packages/core/__test__/mode-dev/`.replaceAll('\\', '/')
+    opt.dir = `${cwd()}/src/__test__/mode-dev/`.replaceAll('\\', '/')
     opt.compressImgBundle = async() => {}
     opt.mode = 'watch'
 
     // mock delete
-    const testImgDir = `${cwd()}/packages/core/__test__/mode-dev/test-res.png`
+    const testImgDir = `${cwd()}/src/__test__/mode-dev/test-res.png`
     await remove(testImgDir)
 
     await devCompressImg(opt)
@@ -128,7 +128,7 @@ describe('test mode dev', () => {
   })
 
   it('getImgFileBundle', async() => {
-    const key = `${cwd()}/packages/core/__test__/mode-dev/test.png`
+    const key = `${cwd()}/src/__test__/mode-dev/test.png`
     const bundle = await getImgFileBundle({
       [key]: 'test.png',
     })
@@ -163,7 +163,7 @@ describe('test mode dev', () => {
   })
 
   it('patchFiles', async() => {
-    const key = `${cwd()}/packages/core/__test__/mode-dev/test.png`
+    const key = `${cwd()}/src/__test__/mode-dev/test.png`
     const patchRes = await patchFiles(
       {
         'test/test-delete.png': 'test-delete.png',

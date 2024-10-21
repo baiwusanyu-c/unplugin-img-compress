@@ -1,6 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { webpackImgCompress: WebpackImgCompress } = require('../dist/index.cjs')
+const { webpackImgCompress: WebpackImgCompress } = require('../../packages/unplugin-img-compress/dist/index.cjs')
 module.exports = {
   entry: './src/index.jsx', // 入口文件
   output: {

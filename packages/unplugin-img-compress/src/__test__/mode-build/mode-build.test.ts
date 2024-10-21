@@ -3,9 +3,9 @@ import { describe, expect, it, vi } from 'vitest'
 import { pathExists, readFile, remove } from 'fs-extra'
 import { jsonClone } from 'baiwusanyu-utils'
 import { viteImgCompress } from '../../index'
-import { compressImgBundle } from '../../compress-tinify'
+import { compressImgBundle } from '../../tinify'
 import type { PluginOption } from 'vite'
-import type { CompressOption } from '../../types'
+import type { CompressOption } from '../../../utils/types'
 
 const option = {
   APIKey: 'kZgn8pxfdjQjKFmf2StLq7CY4TqMgs0T',
@@ -37,9 +37,9 @@ describe('test mode dev', () => {
   })
 
   it('compressImgBundle', async() => {
-    const testResImgDir = `${cwd()}/packages/core/__test__/mode-build/test-res.png`
-    const testResImgOutPutDir = `${cwd()}/packages/core/__test__/mode-build/`
-    const testImgDir = `${cwd()}/packages/core/__test__/mode-build/test.png`
+    const testResImgDir = `${cwd()}/src/__test__/mode-build/test-res.png`
+    const testResImgOutPutDir = `${cwd()}/src/__test__/mode-build/`
+    const testImgDir = `${cwd()}/src/__test__/mode-build/test.png`
     const isShouldClear = await pathExists(testResImgDir)
     if (isShouldClear)
       await remove(testResImgDir)

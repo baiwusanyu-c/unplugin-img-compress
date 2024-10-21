@@ -25,6 +25,8 @@
     "dev": "pnpm run clean && pnpm run --filter @unplugin-img-compress/build dev",
     "play:runtime-build": "pnpm run --filter @unplugin-img-compress/play runtime:build",
     "play:runtime-dev": "pnpm run --filter @unplugin-img-compress/play runtime:dev",
+    "play:webpack-dev": "pnpm run --filter @unplugin-img-compress/play-webpack start",
+    "play:webpack-build": "pnpm run --filter @unplugin-img-compress/play-webpack build",
     "build": "pnpm run clean && pnpm run --filter @unplugin-img-compress/build build",
     "release": "bumpp package.json --commit --push --tag",
     "clean": "rimraf dist && rimraf packages/unplugin-img-compress/dist",
