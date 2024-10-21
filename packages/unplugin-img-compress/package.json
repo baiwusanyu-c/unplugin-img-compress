@@ -30,7 +30,14 @@
     }
   },
   "files": [
-
+    "index.cjs",
+    "index.d.ts",
+    "index.js",
+    "bin/index.cjs",
+    "bin/index.d.ts",
+    "bin/index.js",
+    "README.md",
+    "README.ZH-CN.md"
   ],
   "bin": {
     "unp-img": "./bin/index.cjs"
