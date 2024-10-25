@@ -1,6 +1,6 @@
 import * as path from 'path'
 import { cwd } from 'node:process'
-import { pathExists, readFile, readJson, readdir, remove, stat, writeJson } from 'fs-extra'
+import fs, { pathExists, remove } from 'fs-extra'
 import chokidar from 'chokidar'
 import { log, setGlobalPrefix } from 'baiwusanyu-utils'
 import { isSupportImg } from '../../utils'
@@ -11,11 +11,11 @@ const IMG_TINIFY_RECORD = 'IMG_TINIFY_RECORD.json'
 const getImgFilePath = async(
   filePath: string,
   fileList: Record<string, string> = {}) => {
-  const files = await readdir(filePath)
+  const files = await fs.readdir(filePath)
   for (let i = 0; i < files.length; i++) {
     const fileName = files[i]
     const fileDir = path.join(filePath, fileName)
-    const stats = await stat(fileDir)
+    const stats = await fs.stat(fileDir)
     const isFile = stats.isFile()
     // 是否是文件夹
     const isDir = stats.isDirectory()
@@ -32,7 +32,7 @@ const getImgFilePath = async(
 export async function getImgFileBundle(fileList: Record<string, string>) {
   const bundle = {} as IBundle
   for (const key in fileList) {
-    const source = await readFile(key)
+    const source = await fs.readFile(key)
     bundle[key as string] = {
       fileName: fileList[key],
       source,
@@ -45,7 +45,7 @@ export async function getImgFileBundle(fileList: Record<string, string>) {
 }
 
 const createRecord = async(recordContent: Record<string, string>) => {
-  await writeJson(`${path.resolve()}/${IMG_TINIFY_RECORD}`, recordContent, { spaces: 2 })
+  await fs.writeJson(`${path.resolve()}/${IMG_TINIFY_RECORD}`, recordContent, { spaces: 2 })
 }
 
 export const updateRecord = async(
@@ -58,7 +58,7 @@ export const updateRecord = async(
     const arr = targetPath.split('/')
     recordContent[targetPath] = arr[arr.length - 1]
   }
-  await writeJson(`${path.resolve()}/${IMG_TINIFY_RECORD}`, recordContent, { spaces: 2 })
+  await fs.writeJson(`${path.resolve()}/${IMG_TINIFY_RECORD}`, recordContent, { spaces: 2 })
 }
 
 export const clearRecord = async() => {
@@ -116,7 +116,7 @@ export async function compressImg(option: CompressOption) {
   const isExistRecord = await pathExists(rootFile)
   // 根据 cache 对比当前目录
   if (isExistRecord) {
-    const recordJson = await readJson(`${path.resolve()}/${IMG_TINIFY_RECORD}`)
+    const recordJson = await fs.readJson(`${path.resolve()}/${IMG_TINIFY_RECORD}`)
     const patchRes = await patchFiles(recordJson, fileList)
     fileList = patchRes.fileList
     bundle = patchRes.bundle
