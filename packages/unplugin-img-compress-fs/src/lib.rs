@@ -1,7 +1,5 @@
-
 #![deny(clippy::all)]
 use std::fs::{ canonicalize, read };
-
 #[macro_use]
 extern crate napi_derive;
 
