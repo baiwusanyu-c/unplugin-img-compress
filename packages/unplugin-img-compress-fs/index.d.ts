@@ -5,3 +5,4 @@
 
 export declare function readFile(path: string): Array<number>
 export declare function outPutFile(path: string, data: Array<number>): void
+export declare function pathExists(path: string): boolean

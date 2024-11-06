@@ -1,4 +1,4 @@
-import { outPutFile, readFile } from 'unplugin-img-compress-fs'
+import { outPutFile, readFile, pathExists } from 'unplugin-img-compress-fs'
 import tinify from 'tinify'
 
 export const tinifyBuffer = (data, APIKey) => {
@@ -19,7 +19,9 @@ async function start() {
   const tinifyRes = await tinifyBuffer(data, 'kZgn8pxfdjQjKFmf2StLq7CY4TqMgs0T')
   outPutFile('./homes.png', tinifyRes.toJSON().data)
 }
-start()
+
+console.log(pathExists('./home.png'))
+console.log(pathExists('./homes.png'))
 // TODO: outputFile √
 // TODO: pathExists
 // TODO: readFile √
