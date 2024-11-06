@@ -1,6 +1,6 @@
 #![deny(clippy::all)]
 use path_clean::clean;
-use std::fs::{canonicalize, read, write};
+use std::fs::{canonicalize, read, write, remove_dir_all, remove_file};
 #[macro_use]
 extern crate napi_derive;
 
@@ -20,15 +20,6 @@ pub fn out_put_file(path: String, data: Vec<u8>) -> Result<(), napi::Error> {
   Ok(())
 }
 
-// #[napi]
-// pub fn path_exists(path: String) -> bool {
-//    let normalize_path = match canonicalize(path) {
-//     Ok(_) => true,
-//     Err(_) => false,
-//   };
-//   normalize_path
-// }
-
 #[napi]
 pub async fn path_exists(path: String) -> bool {
   let result = match canonicalize(path) {
@@ -36,4 +27,21 @@ pub async fn path_exists(path: String) -> bool {
     Err(_) => false,
   };
   result
+}
+
+
+
+#[napi]
+pub async fn remove(path: String) -> Result<(), napi::Error> {
+  let normalize_path = canonicalize(path).map_err(|e| napi::Error::new(napi::Status::GenericFailure, format!("路径标准化失败: {}", e)))?;
+  if normalize_path.is_dir() {
+    remove_dir_all(normalize_path)
+        .map_err(|e| napi::Error::new(napi::Status::GenericFailure, format!("删除失败: {}", e)))?;
+  } else if normalize_path.is_file() {
+    remove_file(normalize_path)
+        .map_err(|e| napi::Error::new(napi::Status::GenericFailure, format!("删除失败: {}", e)))?;
+  } else {
+    return Err(napi::Error::new(napi::Status::GenericFailure, "路径既不是文件也不是目录".to_string()));
+  }
+  Ok(())
 }
