@@ -15,13 +15,15 @@ export const tinifyBuffer = (data, APIKey) => {
 }
 
 async function start() {
-  const data = Buffer.from(readFile('./home.png'))
-  const tinifyRes = await tinifyBuffer(data, 'kZgn8pxfdjQjKFmf2StLq7CY4TqMgs0T')
-  outPutFile('./homes.png', tinifyRes.toJSON().data)
+  // const data = Buffer.from(readFile('./home.png'))
+  // const tinifyRes = await tinifyBuffer(data, 'kZgn8pxfdjQjKFmf2StLq7CY4TqMgs0T')
+  // outPutFile('./homes.png', tinifyRes.toJSON().data)
+  let isExists = await pathExists('./home.png')
+  console.log(isExists)
+  isExists = await pathExists('./homes.png')
+  console.log(isExists)
 }
-
-console.log(pathExists('./home.png'))
-console.log(pathExists('./homes.png'))
+start()
 // TODO: outputFile √
 // TODO: pathExists
 // TODO: readFile √
