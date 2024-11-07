@@ -1,4 +1,4 @@
-import { outPutFile, readFile, pathExists, remove } from 'unplugin-img-compress-fs'
+import { outPutFile, readFile, pathExists, remove, copy } from 'unplugin-img-compress-fs'
 import tinify from 'tinify'
 
 export const tinifyBuffer = (data, APIKey) => {
@@ -24,16 +24,17 @@ async function start() {
   // isExists = await pathExists('./homes.png')
   // console.log(isExists)
 
-  await remove('./homes')
+  // await remove('./homes')
+  copy('./home.png', './homes.png')
 }
 start()
 // TODO: outputFile √
 // TODO: pathExists √
 // TODO: readFile √
-// TODO: remove
+// TODO: remove √
 
 // TODO: readdir
 // TODO: readJson
 // TODO: writeJson
-// TODO: copy
+// TODO: copy √
 // TODO: stat

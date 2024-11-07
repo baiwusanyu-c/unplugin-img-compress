@@ -1,6 +1,6 @@
 #![deny(clippy::all)]
 use path_clean::clean;
-use std::fs::{canonicalize, read, write, remove_dir_all, remove_file};
+use std::fs::{canonicalize, read, write, remove_dir_all, remove_file, copy as org_copy};
 #[macro_use]
 extern crate napi_derive;
 
@@ -43,5 +43,12 @@ pub async fn remove(path: String) -> Result<(), napi::Error> {
   } else {
     return Err(napi::Error::new(napi::Status::GenericFailure, "路径既不是文件也不是目录".to_string()));
   }
+  Ok(())
+}
+
+#[napi]
+pub fn copy(src: String, dest: String) -> Result<(), napi::Error> {
+ org_copy(src, dest)
+      .map_err(|e| napi::Error::new(napi::Status::GenericFailure, format!("复制文件失败: {}", e)))?;
   Ok(())
 }
