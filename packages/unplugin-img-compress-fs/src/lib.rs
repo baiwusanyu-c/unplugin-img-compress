@@ -1,6 +1,17 @@
 #![deny(clippy::all)]
 use path_clean::clean;
-use std::fs::{canonicalize, read, write, remove_dir_all, remove_file, copy as org_copy};
+use std::fs::{
+  canonicalize,
+  read,
+  write,
+  remove_dir_all,
+  remove_file,
+  copy as org_copy,
+  read_to_string
+};
+use serde_json::Value;
+use napi::{JsUnknown};
+use napi::bindgen_prelude::{ Env };
 #[macro_use]
 extern crate napi_derive;
 
@@ -51,4 +62,57 @@ pub fn copy(src: String, dest: String) -> Result<(), napi::Error> {
  org_copy(src, dest)
       .map_err(|e| napi::Error::new(napi::Status::GenericFailure, format!("复制文件失败: {}", e)))?;
   Ok(())
+}
+
+#[napi]
+pub fn read_json(env: Env, path: String) -> Result<JsUnknown, napi::Error> {
+  // 读取 JSON 文件内容
+  let file_content = read_to_string(&path)
+      .map_err(|e| napi::Error::new(napi::Status::GenericFailure, format!("读取文件失败: {}", e)))?;
+
+  // 解析 JSON 内容
+  let json_data: Value = serde_json::from_str(&file_content)
+      .map_err(|e| napi::Error::new(napi::Status::GenericFailure, format!("解析 JSON 失败: {}", e)))?;
+
+  // 将解析的 JSON 返回
+
+  json_to_js_value(&env, json_data)
+}
+
+// 辅助函数：递归转换 JSON Value 为 JsUnknown
+fn json_to_js_value(env: &Env, value: Value) -> Result<JsUnknown, napi::Error> {
+  match value {
+    Value::Null => env.get_null().map(|v| v.into_unknown()),
+    Value::Bool(b) => env.get_boolean(b).map(|v| v.into_unknown()),
+    Value::Number(num) => {
+      if let Some(n) = num.as_i64() {
+        env.create_int64(n).map(|v| v.into_unknown())
+      } else if let Some(n) = num.as_i64() {
+        env.create_int32(n as i32).map(|v| v.into_unknown())
+      }else if let Some(n) = num.as_u64() {
+        env.create_uint32(n as u32).map(|v| v.into_unknown())
+      }else if let Some(n) = num.as_f64() {
+        env.create_double(n).map(|v| v.into_unknown())
+      } else {
+        Err(napi::Error::new(napi::Status::GenericFailure, "数字转换失败".to_string()))
+      }
+    }
+    Value::String(s) => env.create_string(&s).map(|v| v.into_unknown()),
+    Value::Array(arr) => {
+      let mut js_array = env.create_array_with_length(arr.len())?;
+      for (i, item) in arr.into_iter().enumerate() {
+        let js_value = json_to_js_value(env, item)?;
+        js_array.set_element(i as u32, js_value)?;
+      }
+      Ok(js_array.into_unknown())
+    }
+    Value::Object(map) => {
+      let mut js_object = env.create_object()?;
+      for (k, v) in map {
+        let js_value = json_to_js_value(env, v)?;
+        js_object.set_named_property(&k, js_value)?;
+      }
+      Ok(js_object.into_unknown())
+    }
+  }
 }
