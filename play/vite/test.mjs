@@ -1,4 +1,4 @@
-import { outPutFile, readFile, pathExists, remove, copy, readJson } from 'unplugin-img-compress-fs'
+import { outPutFile, readFile, pathExists, remove, copy, readJson, jsObjectToHashmap } from 'unplugin-img-compress-fs'
 import tinify from 'tinify'
 
 export const tinifyBuffer = (data, APIKey) => {
@@ -26,8 +26,11 @@ async function start() {
 
   // await remove('./homes')
   // copy('./home.png', './homes.png')
-    const json = readJson('./package.json')
-    debugger
+  const json = readJson('./package.json')
+  json.name = 'baiwusanyu'
+  const res = jsObjectToHashmap(json)
+  debugger
+  // writeJson(json, './package-test.json')
 }
 start()
 // TODO: outputFile √
