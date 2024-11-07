@@ -1,4 +1,6 @@
 #![deny(clippy::all)]
+
+use std::collections::HashMap;
 use path_clean::clean;
 use std::fs::{
   canonicalize,
@@ -7,11 +9,13 @@ use std::fs::{
   remove_dir_all,
   remove_file,
   copy as org_copy,
-  read_to_string
+  read_to_string,
+  File,
 };
-use serde_json::Value;
-use napi::{JsUnknown};
+use serde_json::{Value};
+use napi::{JsUnknown, JsObject, JsString};
 use napi::bindgen_prelude::{ Env };
+
 #[macro_use]
 extern crate napi_derive;
 
@@ -115,4 +119,67 @@ fn json_to_js_value(env: &Env, value: Value) -> Result<JsUnknown, napi::Error> {
       Ok(js_object.into_unknown())
     }
   }
+}
+
+
+/*#[napi]
+pub fn write_json(js_obj: JsUnknown, path: String) -> Result<(), napi::Error> {
+
+
+}*/
+
+#[napi]
+pub fn js_object_to_hashmap(js_obj: JsObject) -> Result<Vec<String>, napi::Error> {
+  let keys = js_obj.get_property_names()?;
+
+  let keys_len = keys.get_array_length()?;
+  let mut res: Vec<String> = Vec::new();
+  for i in 0..keys_len {
+    let key_value: JsString = keys.get_element(i)?;
+
+    // 将 JsString 转换为 UTF-8 字符串，并将其作为 Rust 字符串处理
+    let key_str = key_value.into_utf8()?.as_str()?.to_string();  // 解包 Result<&str> 并转换为 String
+
+    // 将字符串添加到结果中
+    res.push(key_str);
+  }
+  Ok(res)
+  // 获取所有属性名
+  // let keys_len = keys.get_array_length()?;  // 获取属性数量
+
+  // let mut map = HashMap::new();             // 用来存储转换后的数据
+//
+  // for i in 0..keys_len {
+  //   let key = keys.get_element(i)?;  // 获取键名（JsValue）
+//
+  //   // 将键名转换为字符串
+  //   let key_str = key.as_string()?;
+//
+  //   // 获取每个属性的值
+  //   let value = js_obj.get_property(&key_str)?;
+//
+  //   // 根据值的类型进行处理
+  //   let json_value = if value.is_object()? {
+  //     // 如果值是对象，递归转换为 HashMap
+  //     let nested_obj = value.coerce_to_object()?;
+  //     Value::Object(js_object_to_hashmap(nested_obj)?)
+  //   } else if value.is_string()? {
+  //     // 如果值是字符串
+  //     Value::String(value.as_string()?.into())
+  //   } else if value.is_number()? {
+  //     // 如果值是数字
+  //     Value::Number(value.as_f64()? as f64)
+  //   } else if value.is_boolean()? {
+  //     // 如果值是布尔值
+  //     Value::Bool(value.as_bool()?)
+  //   } else {
+  //     // 处理其他类型，例如 null
+  //     Value::Null
+  //   };
+//
+  //   // 插入到 HashMap 中
+  //   map.insert(key_str.to_string(), json_value);
+  // }
+//
+  // Ok(map)
 }
