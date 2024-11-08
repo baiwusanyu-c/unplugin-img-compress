@@ -13,7 +13,7 @@ use std::fs::{
   File,
 };
 use serde_json::{Value};
-use napi::{JsUnknown, JsObject, JsString};
+use napi::{JsUnknown, JsObject, JsString, JsBoolean, JsNumber, ValueType};
 use napi::bindgen_prelude::{ Env };
 
 #[macro_use]
@@ -128,58 +128,38 @@ pub fn write_json(js_obj: JsUnknown, path: String) -> Result<(), napi::Error> {
 
 }*/
 
-#[napi]
-pub fn js_object_to_hashmap(js_obj: JsObject) -> Result<Vec<String>, napi::Error> {
-  let keys = js_obj.get_property_names()?;
 
+#[napi]
+pub fn js_object_to_hashmap(js_obj: JsObject) -> Result<HashMap<String, Value> , napi::Error> {
+  let keys = js_obj.get_property_names()?;
   let keys_len = keys.get_array_length()?;
-  let mut res: Vec<String> = Vec::new();
+  let mut map: HashMap<String, Value> = HashMap::new();
+
   for i in 0..keys_len {
     let key_value: JsString = keys.get_element(i)?;
+    let key_str = key_value.into_utf8()?.as_str()?.to_string();
+    // 获取键对应的值，类型为 Option<JsUnknown>
+    let value: Option<JsUnknown> = js_obj.get(&key_str)?;
 
-    // 将 JsString 转换为 UTF-8 字符串，并将其作为 Rust 字符串处理
-    let key_str = key_value.into_utf8()?.as_str()?.to_string();  // 解包 Result<&str> 并转换为 String
-
-    // 将字符串添加到结果中
-    res.push(key_str);
+    if let Some(val) = value {
+        match val.get_type() {
+          Ok(ValueType::Number) => {
+            let js_num: JsNumber = val.coerce_to_number()?;
+            map.insert(key_str, js_num.get_int32()?.into());
+          }
+          Ok(ValueType::String) => {
+            let js_str: JsString = val.coerce_to_string()?;
+            map.insert(key_str, js_str.into_utf8()?.as_str()?.into());
+          }
+          Ok(ValueType::Boolean) => {
+            let js_bool: JsBoolean = val.coerce_to_bool()?;
+            map.insert(key_str, js_bool.get_value()?.into());
+          }
+          _ => {}
+        }
+    }
   }
-  Ok(res)
-  // 获取所有属性名
-  // let keys_len = keys.get_array_length()?;  // 获取属性数量
 
-  // let mut map = HashMap::new();             // 用来存储转换后的数据
-//
-  // for i in 0..keys_len {
-  //   let key = keys.get_element(i)?;  // 获取键名（JsValue）
-//
-  //   // 将键名转换为字符串
-  //   let key_str = key.as_string()?;
-//
-  //   // 获取每个属性的值
-  //   let value = js_obj.get_property(&key_str)?;
-//
-  //   // 根据值的类型进行处理
-  //   let json_value = if value.is_object()? {
-  //     // 如果值是对象，递归转换为 HashMap
-  //     let nested_obj = value.coerce_to_object()?;
-  //     Value::Object(js_object_to_hashmap(nested_obj)?)
-  //   } else if value.is_string()? {
-  //     // 如果值是字符串
-  //     Value::String(value.as_string()?.into())
-  //   } else if value.is_number()? {
-  //     // 如果值是数字
-  //     Value::Number(value.as_f64()? as f64)
-  //   } else if value.is_boolean()? {
-  //     // 如果值是布尔值
-  //     Value::Bool(value.as_bool()?)
-  //   } else {
-  //     // 处理其他类型，例如 null
-  //     Value::Null
-  //   };
-//
-  //   // 插入到 HashMap 中
-  //   map.insert(key_str.to_string(), json_value);
-  // }
-//
-  // Ok(map)
+  Ok(map)
+
 }

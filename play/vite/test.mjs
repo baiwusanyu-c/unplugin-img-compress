@@ -26,9 +26,11 @@ async function start() {
 
   // await remove('./homes')
   // copy('./home.png', './homes.png')
-  const json = readJson('./package.json')
-  json.name = 'baiwusanyu'
-  const res = jsObjectToHashmap(json)
+
+  // const json = readJson('./package.json')
+  // json.name = 'baiwusanyu'
+
+  const res = jsObjectToHashmap({ baiwusany: 'baiwu', asd: 1, qqf: false })
   debugger
   // writeJson(json, './package-test.json')
 }
