@@ -13,7 +13,7 @@ function webRspackHandler(
 ) {
   compiler.hooks.emit.tapAsync('unplugin-img-compress', (
     compilation: RspackCompilation | WebpackCompilation,
-    callback) => {
+    callback: any) => {
     ctx.dir = (compilation.outputOptions.path || './dist').replaceAll('\\', '/')
     for (const filename in compilation.assets) {
       if (/\.(png|jpg|jpeg|gif|svg)$/.test(filename)) {
