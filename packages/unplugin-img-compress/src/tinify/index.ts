@@ -9,9 +9,10 @@ export const tinifyBuffer = (data: Uint8Array, APIKey: string) => {
   return new Promise((resolve) => {
     tinify.fromBuffer(data)
       .toBuffer((err, resultData) => {
-        if (err)
-          throw err
-
+        if (err) {
+          log('error', err.message)
+          resolve(data)
+        }
         resolve(resultData)
       })
   })
